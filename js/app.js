@@ -78,3 +78,4 @@ allCards.forEach(function(card) {
  		}
  	});
 });
+
