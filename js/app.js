@@ -37,9 +37,44 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
- let allCards = document.querySelectorAll('.card');
- 	allCards.forEach(function(card) {
- 		card.addEventListener('click', function(event) {
- 			card.classList.add('open', 'show');
- 		});
+let allCards = document.querySelectorAll('.card');
+let openCards = [];
+
+allCards.forEach(function(card) {
+ 	card.addEventListener('click', function(event) {
+
+ 		if (!card.classList.contains('open') && !card.classList.contains ('show') && !card.classList.contains ('match')) {
+	 		openCards.push(card); 
+	 		card.classList.add('open', 'show');
+
+	 //to check for matching cards
+	 	var firstCardType = openCards[0].dataset.card;
+
+	//look into bug where more than 2 cards can be opened
+	//to make cards turn over after a set time - if they don't match
+	 	if (openCards.length == 2) {
+	 		if (openCards[0].dataset.card == openCards[1].dataset.card) {
+	 			openCards[0].classList.add('match');
+	 			openCards[0].classList.add('open'); 
+	 			openCards[0].classList.add('show');
+
+	 			openCards[1].classList.add('match');
+	 			openCards[1].classList.add('open'); 
+	 			openCards[1].classList.add('show');
+ 			}
+ 				openCards = []; 
+
+ 			else {
+ 				//if no match, hide
+	 			setTimeout(function(){
+	 			openCards.forEach(function(card){
+	 				card.classList.remove('open', 'show');
+	 			});
+
+	 			openCards = []; 
+	 			}, 1000); 
+ 				}			 		
+	 		}
+ 		}
  	});
+});
