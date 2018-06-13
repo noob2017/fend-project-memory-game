@@ -1,7 +1,8 @@
+//below included with Udacity starter code
 /*
  * Create a list that holds all of your cards
  */
-var cards = ("fa fa-diamond", 
+/*var cards = ("fa fa-diamond", 
 	"fa fa-paper-plane-o", 
 	"fa fa-anchor", 
 	"fa fa-bolt", 
@@ -11,7 +12,11 @@ var cards = ("fa fa-diamond",
 	"fa fa-bicycle", 
 	"fa fa-diamond", 
 	"fa fa-bomb", 
-	"fa fa-leaf")
+	"fa fa-leaf")*/
+
+//********************************************
+
+//below included with Udacity starter code
 
 /*
  * Display the cards on the page
@@ -35,7 +40,6 @@ function shuffle(array) {
     return array;
 }
 
-
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -47,17 +51,45 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-let allCards = document.querySelectorAll('.card');
+//****************************************
 
-deck.addEventListener('click', event){
+//got below from Matt Crawford
+/*let deck = document.querySelectorAll('.card');
+
+deck.addEventListener('click', function(e) {
 	let clickTarget = event.target;
 	if (clickTarget.classList.contains('card')) {
 		clickTarget.classList.toggle('open');
 		clickTarget.classList.toggle('show');
 	}
-}; 
+}); */
 
 
+//***************************************
+
+//got li.card suggestion from Ryan Waite
+//got lastFlipped suggestion from Ryan Waite
+let cards = document.querySelectorAll('li.card');
+let lastFlipped = null;
+
+cards.forEach(function(card){
+   card.addEventListener('click', function(event){
+
+      if(lastFlipped) {
+         // now you have a reference to this card and lastFlipped
+         // now you just have to compare them!
+         openCards.push(card);
+         card.classList.add('open', 'show');
+      }
+      else {
+         lastFlipped = card;
+      }
+   });
+});
+
+//***************************************
+
+//got below from Mike Wales
 /*
 let allCards = document.querySelectorAll('.card');
 let openCards = [];
