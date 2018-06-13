@@ -1,7 +1,17 @@
 /*
  * Create a list that holds all of your cards
  */
-var cards = ("fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-anchor", "fa fa-leaf", "fa fa-bicycle", "fa fa-diamond", "fa fa-bomb", "fa fa-leaf")
+var cards = ("fa fa-diamond", 
+	"fa fa-paper-plane-o", 
+	"fa fa-anchor", 
+	"fa fa-bolt", 
+	"fa fa-cube", 
+	"fa fa-anchor", 
+	"fa fa-leaf", 
+	"fa fa-bicycle", 
+	"fa fa-diamond", 
+	"fa fa-bomb", 
+	"fa fa-leaf")
 
 /*
  * Display the cards on the page
@@ -37,6 +47,18 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+let allCards = document.querySelectorAll('.card');
+
+deck.addEventListener('click', event){
+	let clickTarget = event.target;
+	if (clickTarget.classList.contains('card')) {
+		clickTarget.classList.toggle('open');
+		clickTarget.classList.toggle('show');
+	}
+}; 
+
+
+/*
 let allCards = document.querySelectorAll('.card');
 let openCards = [];
 
@@ -79,3 +101,4 @@ allCards.forEach(function(card) {
  	});
 });
 
+/*
