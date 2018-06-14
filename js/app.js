@@ -76,21 +76,20 @@ const openCards = [];
 cards.forEach(function(card){
    card.addEventListener('click', function(event){
 
-      if/*(lastFlipped)*/
+      if(lastFlipped) {
          // now you have a reference to this card and lastFlipped
          // now you just have to compare them!
          //by default, `lastFlipped` is null because when the game starts, there is no previously flipped card. 
          //Now we need logic inside the click event listener to determine if there is a previously clicked card. 
          //if `lastFlipped` is null or falsey, then there is no previously flipped card. otherwise, there is a previously flipped card! 
          //if there is no previously flipped card, this card will be stored in `lastFlipped`:
-         (lastFlipped === null || falsey) {
+         //(lastFlipped === null; lastFlipped || falsey) {
          card.classList.add('open', 'show');
      	}
-      });
-      /*else {
+      else {
          lastFlipped = card;
       }
-   });*/
+   });
 });
 
 //***************************************
