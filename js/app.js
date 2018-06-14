@@ -2,7 +2,7 @@
 /*
  * Create a list that holds all of your cards
  */
-let cards = ("fa fa-diamond", 
+let cards = ["fa fa-diamond", 
 	"fa fa-paper-plane-o", 
 	"fa fa-anchor", 
 	"fa fa-bolt", 
@@ -12,7 +12,7 @@ let cards = ("fa fa-diamond",
 	"fa fa-bicycle", 
 	"fa fa-diamond", 
 	"fa fa-bomb", 
-	"fa fa-leaf");
+	"fa fa-leaf"];
 
 //********************************************
 
@@ -69,12 +69,12 @@ deck.addEventListener('click', function(e) {
 
 //got li.card suggestion from Ryan Waite
 //got lastFlipped suggestion from Ryan Waite
-let allCards = document.querySelectorAll('li.card');
+let allCards = document.querySelectorAll("li.card");
 const lastFlipped = null;
 const openCards = [];
 
 cards.forEach(function(card){
-   card.addEventListener('click', function(event){
+   card.addEventListener("click", function(event){
 
       if(lastFlipped) {
          // now you have a reference to this card and lastFlipped
@@ -84,10 +84,11 @@ cards.forEach(function(card){
          //if `lastFlipped` is null or falsey, then there is no previously flipped card. otherwise, there is a previously flipped card! 
          //if there is no previously flipped card, this card will be stored in `lastFlipped`:
          //(lastFlipped === null; lastFlipped || falsey) {
-         card.classList.add('open', 'show');
+         return card.classList.add("open", "show");
+         console.log("click!");
      	}
       else {
-         lastFlipped = card;
+         return lastFlipped = card;
       }
    });
 });
