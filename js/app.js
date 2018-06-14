@@ -2,7 +2,7 @@
 /*
  * Create a list that holds all of your cards
  */
-/*var cards = ("fa fa-diamond", 
+let cards = ("fa fa-diamond", 
 	"fa fa-paper-plane-o", 
 	"fa fa-anchor", 
 	"fa fa-bolt", 
@@ -12,7 +12,7 @@
 	"fa fa-bicycle", 
 	"fa fa-diamond", 
 	"fa fa-bomb", 
-	"fa fa-leaf")*/
+	"fa fa-leaf");
 
 //********************************************
 
@@ -27,7 +27,7 @@
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -69,22 +69,28 @@ deck.addEventListener('click', function(e) {
 
 //got li.card suggestion from Ryan Waite
 //got lastFlipped suggestion from Ryan Waite
-let cards = document.querySelectorAll('li.card');
-let lastFlipped = null;
+let allCards = document.querySelectorAll('li.card');
+const lastFlipped = null;
+const openCards = [];
 
 cards.forEach(function(card){
    card.addEventListener('click', function(event){
 
-      if(lastFlipped) {
+      if/*(lastFlipped)*/
          // now you have a reference to this card and lastFlipped
          // now you just have to compare them!
-         openCards.push(card);
+         //by default, `lastFlipped` is null because when the game starts, there is no previously flipped card. 
+         //Now we need logic inside the click event listener to determine if there is a previously clicked card. 
+         //if `lastFlipped` is null or falsey, then there is no previously flipped card. otherwise, there is a previously flipped card! 
+         //if there is no previously flipped card, this card will be stored in `lastFlipped`:
+         (lastFlipped === null || falsey) {
          card.classList.add('open', 'show');
-      }
-      else {
+     	}
+      });
+      /*else {
          lastFlipped = card;
       }
-   });
+   });*/
 });
 
 //***************************************
