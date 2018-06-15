@@ -2,21 +2,27 @@
 /*
  * Create a list that holds all of your cards
  */
-let cards = ["fa fa-diamond", 
-	"fa fa-paper-plane-o", 
-	"fa fa-anchor", 
-	"fa fa-bolt", 
-	"fa fa-cube", 
-	"fa fa-anchor", 
-	"fa fa-leaf", 
-	"fa fa-bicycle", 
-	"fa fa-diamond", 
-	"fa fa-bomb", 
-	"fa fa-leaf"];
+const cards = ['fa-diamond',
+    'fa-diamond',
+    'fa-paper-plane-o',
+    'fa-paper-plane-o',
+    'fa-anchor',
+    'fa-anchor',
+    'fa-bolt',
+    'fa-bolt',
+    'fa-cube',
+    'fa-cube',
+    'fa-bomb',
+    'fa-bomb',
+    'fa-bicycle',
+    'fa-bicycle',
+    'fa-leaf',
+    'fa-leaf'
+];
 
 //********************************************
 
-//below included with Udacity starter code
+//below provided in Udacity starter code
 
 /*
  * Display the cards on the page
@@ -25,9 +31,9 @@ let cards = ["fa fa-diamond",
  *   - add each card's HTML to the page
  */
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+// Shuffle function from http://stackoverflow.com/a/2450976, provided by Udacity in starter code.
 function shuffle(array) {
-    let currentIndex = array.length, temporaryValue, randomIndex;
+    var currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -67,14 +73,14 @@ deck.addEventListener('click', function(e) {
 
 //***************************************
 
-//got li.card suggestion from Ryan Waite
-//got lastFlipped suggestion from Ryan Waite
-let allCards = document.querySelectorAll("li.card");
+// Thanks to Ryan Waite for the li.card suggestion!
+// Thanks to Ryan Waite for the lastFlipped suggestion! 
+const allCards = document.querySelectorAll('li.card');
 const lastFlipped = null;
 const openCards = [];
 
 cards.forEach(function(card){
-   card.addEventListener("click", function(event){
+   card.addEventListener('click', function(event){
 
       if(lastFlipped) {
          // now you have a reference to this card and lastFlipped
@@ -84,11 +90,11 @@ cards.forEach(function(card){
          //if `lastFlipped` is null or falsey, then there is no previously flipped card. otherwise, there is a previously flipped card! 
          //if there is no previously flipped card, this card will be stored in `lastFlipped`:
          //(lastFlipped === null; lastFlipped || falsey) {
-         return card.classList.add("open", "show");
-         console.log("click!");
+         card.classList.add('open', 'show');
+         console.log('click!');
      	}
       else {
-         return lastFlipped = card;
+         lastFlipped = card;
       }
    });
 });
@@ -96,8 +102,8 @@ cards.forEach(function(card){
 //***************************************
 
 //got below from Mike Wales
-/*
-let allCards = document.querySelectorAll('.card');
+
+/* let allCards = document.querySelectorAll('.card');
 let openCards = [];
 
 allCards.forEach(function(card) {
