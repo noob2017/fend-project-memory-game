@@ -33,7 +33,7 @@ const cards = ['fa-diamond',
 
 // Shuffle function from http://stackoverflow.com/a/2450976, provided by Udacity in starter code.
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -59,90 +59,20 @@ function shuffle(array) {
 
 //****************************************
 
-//got below from Matt Crawford
-/*let deck = document.querySelectorAll('.card');
-
-deck.addEventListener('click', function(e) {
-	let clickTarget = event.target;
-	if (clickTarget.classList.contains('card')) {
-		clickTarget.classList.toggle('open');
-		clickTarget.classList.toggle('show');
-	}
-}); */
-
-
-//***************************************
-
 // Thanks to Ryan Waite for the li.card suggestion!
 // Thanks to Ryan Waite for the lastFlipped suggestion! 
 const allCards = document.querySelectorAll('li.card');
 const lastFlipped = null;
 const openCards = [];
 
-cards.forEach(function(card){
-   card.addEventListener('click', function(event){
-
-      if(lastFlipped) {
-         // now you have a reference to this card and lastFlipped
-         // now you just have to compare them!
-         //by default, `lastFlipped` is null because when the game starts, there is no previously flipped card. 
-         //Now we need logic inside the click event listener to determine if there is a previously clicked card. 
-         //if `lastFlipped` is null or falsey, then there is no previously flipped card. otherwise, there is a previously flipped card! 
-         //if there is no previously flipped card, this card will be stored in `lastFlipped`:
-         //(lastFlipped === null; lastFlipped || falsey) {
-         card.classList.add('open', 'show');
-         console.log('click!');
+allCards.forEach(function(card){
+	card.addEventListener('click', function(event){
+   		card.classList.add('open', 'show');
+      	if(lastFlipped) {
+        	console.log('click!');
      	}
-      else {
-         lastFlipped = card;
-      }
-   });
+      	else {
+        	lastFlipped = card;
+      	}
+   	});
 });
-
-//***************************************
-
-//got below from Mike Wales
-
-/* let allCards = document.querySelectorAll('.card');
-let openCards = [];
-
-allCards.forEach(function(card) {
- 	card.addEventListener('click', function(event) {
-
- 		if (!card.classList.contains('open') && !card.classList.contains ('show') && !card.classList.contains ('match')) {
-	 		openCards.push(card); 
-	 		card.classList.add('open', 'show');
-
-	 //to check for matching cards
-	 	var firstCardType = openCards[0].dataset.card;
-
-	//look into bug where more than 2 cards can be opened
-	//to make cards turn over after a set time - if they don't match
-	 	if (openCards.length == 2) {
-	 		if (openCards[0].dataset.card == openCards[1].dataset.card) {
-	 			openCards[0].classList.add('match');
-	 			openCards[0].classList.add('open'); 
-	 			openCards[0].classList.add('show');
-
-	 			openCards[1].classList.add('match');
-	 			openCards[1].classList.add('open'); 
-	 			openCards[1].classList.add('show');
- 			}
- 				openCards = []; 
-
- 			else {
- 				//if no match, hide
-	 			setTimeout(function(){
-	 			openCards.forEach(function(card){
-	 				card.classList.remove('open', 'show');
-	 			});
-
-	 			openCards = []; 
-	 			}, 1000); 
- 				}			 		
-	 		}
- 		}
- 	});
-});
-
-/*
