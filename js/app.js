@@ -62,7 +62,7 @@ function shuffle(array) {
 // Thanks to Ryan Waite for the li.card suggestion!
 // Thanks to Ryan Waite for the lastFlipped suggestion! 
 const allCards = document.querySelectorAll('li.card');
-const lastFlipped = null;
+let lastFlipped = null;
 const openCards = [];
 
 allCards.forEach(function(card){
