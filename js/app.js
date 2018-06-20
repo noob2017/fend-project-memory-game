@@ -1,4 +1,4 @@
-//below included with Udacity starter code
+//below provided in Udacity starter code
 /*
  * Create a list that holds all of your cards
  */
