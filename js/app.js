@@ -47,8 +47,8 @@ function shuffle(array) {
 }
 
 /*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
+ * DONE! set up the event listener for a card. If a card is clicked:
+ * DONE! - display the card's symbol (put this functionality in another function that you call from this one)
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
  *  - if the list already has another card, check to see if the two cards match
  *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
@@ -63,16 +63,39 @@ function shuffle(array) {
 // Thanks to Ryan Waite for the lastFlipped suggestion! 
 const allCards = document.querySelectorAll('li.card');
 let lastFlipped = null;
-const openCards = [];
+let openCards = []; //Thanks to Mike Wales!
+//let shuffled = shuffle(allCards);
 
-allCards.forEach(function(card){
-	card.addEventListener('click', function(event){
+//show cards when clicked
+allCards.forEach(function(card) {
+	card.addEventListener('click', function(event) {
    		card.classList.add('open', 'show');
       	if(lastFlipped) {
         	console.log('click!');
+        	//TEST adding function to push card to open cards list here
+        	function addFlippedCard(lastFlipped) {
+				openCards.push(lastFlipped);
+				console.log(addFlippedCard);
+			}	
+				addFlippedCard();
      	}
       	else {
         	lastFlipped = card;
       	}
    	});
+	
+	//TEST pushing card to open cards list/array
+	//function addFlippedCard(lastFlipped) {
+		//openCards.push(lastFlipped);
+		//console.log(openCards);
+	//}
+
 });
+
+//TEST alternate method of pushing card to open cards list
+/*const deckOfCards = document.querySelector('.deck');
+
+ 	for (i = 0; i < shuffledArray.length; i++) {
+    	deckOfCards.children[i].children[0].className = shuffledArray[i];
+  	};
+*/
