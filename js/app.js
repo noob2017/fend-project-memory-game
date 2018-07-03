@@ -1,32 +1,49 @@
-// WIP3
-// STATUS: Cards flipping, but clicks not showing in console; not shuffling, and moves counter not counting
+// WIP4
+// STATUS: Cards flipping, but clicks not showing in console; symbols not showing; not shuffling, and moves counter not counting
 
-// ** Array to hold cards **
-// Thanks to https://scotch.io/tutorials/how-to-build-a-memory-matching-game-in-javascript for help with setting up the loop
-// Removed - Thanks to https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax for an explanation of the spread syntax
-// Removed - Thanks to Ryan Waite for the li.card suggestion
-//Removed - let card = document.querySelectorAll('li.card'); Mentor suggested dropping the li on 6/27
 let cards = document.querySelectorAll('.card');
-//Removed - let card = document.getElementsByClassName("card"); Mentor suggested replacing let card with let cards on 6/27
-//Removed - let cards = [...card]; Mentor suggested dropping this part as well, and replacing let card with let cards on 6/27
+const openCards = [];
 
-// ** Display cards toggle **
 let displayCard = function () {
   this.classList.toggle('open');
-  this.classList.toggle('show');
-  //Temporarily removed - Thanks to https://scotch.io/tutorials/how-to-build-a-memory-matching-game-in-javascript for the suggestion to disable the cards
-  //Temporarily removed - this.classList.toggle('disabled');
+
+  //write 1 line of code below this that adds the clicked card to a new array. Declare the new array variable outside of this function so it can be accessed by other functions like the checker function
+    openCards.push('this'); // ** (Lisa) pushes cards with .open class to new openCards array; can't tell if this is doing anything yet
+
+  // write an if statement to check if the new array has two items, if it does, call back a checker function (you will write this checker function after this)
+  if (openCards.length === 2) {
+  // checkMatch(); ** (Lisa) changed this part up a bit
+  //   }
+    console.log("two!");
+  }
 };
 
-// ** Loop to add event listeners **
-for (let i = 0; i < cards.length; i++) { 
-    cards[i].addEventListener('click', displayCard);
-    console.log('click!');
+// ** (Lisa) NEW STARTS HERE 7/1
+function checkMatch () {
+  if (openCards[0].innerHTML ===
+     openCards[1].innerHTML) { //no idea how to check if they match! the .card match class gets added later, so how do I check for matching before that?
+  this.classList.toggle('card match'); 
+    console.log('match!');
+  }
+  else {
+    console.log('no match :( ')
+  }
 }
 
-//**********************************
+// write a checker function here. This function will need an if else statement to check the array you just made. As in: if the two cards match, toggle a 'match' class (which you have to make in css) else, toggle a 'wrong' class (you also have to make this). At the end of the function (after the if/else), empty out the array
 
-// Udacity starter code: 
+//if openCards.classList.contains('card match') { ** (Lisa) this looks super wrong-ola! 
+  // this.classList.
+//}
+
+//
+// ======================================== END OF FIRST SESSION =======================================
+
+// loop to add event listeners
+for (let i = 0; i < cards.length; i++) {
+    cards[i].addEventListener('click', displayCard);
+}
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -40,41 +57,9 @@ function shuffle(array) {
     }
 
     return array;
-};
+}
 
-// End Udacity starter code
-
-//***************************
-
-/* Udacity starter code:
- * Create a list that holds all of your cards
- * End Udacity starter code
- */
-
- /* Udacity starter code:
- * DONE! - Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- * End Udacity starter code
- */
-
-/* Udacity starter code:
- * DONE! - set up the event listener for a card. If a card is clicked:
- * DONE! - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- * End Udacity starter code
- */
-
-//***************************
-
-//save this for later (from the scotch.io link above - give credit if used!)
-/*const deck = document.querySelector('.deck');
+const deck = document.querySelector('.deck');
 function startGame() {
   let shuffledCards = shuffle(cards);
   for (let i = 0; i < shuffledCards.length; i++) {
@@ -82,10 +67,10 @@ function startGame() {
       deck.appendChild(item);
     });
   }
-}*/
+}
 
-//save this for later (from the scotch.io link above - give credit if used!)
-/*function moveCounter() {
+
+function moveCounter() {
     moves++;
     const counter = document.querySelector('.moves');
     counter.innerHTML = moves;
@@ -96,4 +81,4 @@ function startGame() {
         hour = 0;
         startTimer();
     }
-}*/
+}
