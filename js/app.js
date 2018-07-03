@@ -6,6 +6,7 @@ const openCards = [];
 
 let displayCard = function () {
   this.classList.toggle('open');
+  this.classList.toggle('show');
 
   //write 1 line of code below this that adds the clicked card to a new array. Declare the new array variable outside of this function so it can be accessed by other functions like the checker function
     openCards.push('this'); // ** (Lisa) pushes cards with .open class to new openCards array; can't tell if this is doing anything yet
@@ -21,7 +22,7 @@ let displayCard = function () {
 // ** (Lisa) NEW STARTS HERE 7/1
 function checkMatch () {
   if (openCards[0].innerHTML ===
-     openCards[1].innerHTML) { //no idea how to check if they match! the .card match class gets added later, so how do I check for matching before that?
+     openCards[1].innerHTML) { //not working
   this.classList.toggle('card match'); 
     console.log('match!');
   }
