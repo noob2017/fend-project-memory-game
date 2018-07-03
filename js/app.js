@@ -1,4 +1,4 @@
-// WIP4
+// WIP4 (work)
 // STATUS: Cards flipping, but clicks not showing in console; symbols not showing; not shuffling, and moves counter not counting
 
 let cards = document.querySelectorAll('.card');
@@ -9,13 +9,12 @@ let displayCard = function () {
   this.classList.toggle('show');
 
   //write 1 line of code below this that adds the clicked card to a new array. Declare the new array variable outside of this function so it can be accessed by other functions like the checker function
-    openCards.push('this'); // ** (Lisa) pushes cards with .open class to new openCards array; can't tell if this is doing anything yet
+    openCards.push(this); // ** (Lisa) pushes cards with .open class to new openCards array; can't tell if this is doing anything yet
 
   // write an if statement to check if the new array has two items, if it does, call back a checker function (you will write this checker function after this)
   if (openCards.length === 2) {
-  // checkMatch(); ** (Lisa) changed this part up a bit
-  //   }
-    console.log("two!");
+    console.log('two!');
+    checkMatch();
   }
 };
 
@@ -23,19 +22,28 @@ let displayCard = function () {
 function checkMatch () {
   if (openCards[0].innerHTML ===
      openCards[1].innerHTML) { //not working
-  this.classList.toggle('card match'); 
+  	//insert additional loop here; loop example below
+  		//var i;
+		//for (i = 0; i < cars.length; i++) { 
+    	//text += cars[i] + "<br>";
+    	//empty openCards array; 
+  this.classList.toggle('match'); 
     console.log('match!');
   }
   else {
+  	//insert additional loop here; loop example below
+  		//var i;
+		//for (i = 0; i < cars.length; i++) { 
+    	//text += cars[i] + "<br>";
+    	//empty openCards array; 
     console.log('no match :( ')
   }
 }
 
-// write a checker function here. This function will need an if else statement to check the array you just made. As in: if the two cards match, toggle a 'match' class (which you have to make in css) else, toggle a 'wrong' class (you also have to make this). At the end of the function (after the if/else), empty out the array
+// write a checker function here. This function will need an if else statement to check the array you just made. 
+// As in: if the two cards match, toggle a 'match' class (which you have to make in css) else, toggle a 'wrong' class (you also have to make this). 
+// At the end of the function (after the if/else), empty out the array
 
-//if openCards.classList.contains('card match') { ** (Lisa) this looks super wrong-ola! 
-  // this.classList.
-//}
 
 //
 // ======================================== END OF FIRST SESSION =======================================
