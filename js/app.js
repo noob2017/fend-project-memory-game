@@ -1,5 +1,5 @@
-// WIP4 (work)
-// STATUS: Cards flipping, but clicks not showing in console; symbols not showing; not shuffling, and moves counter not counting
+// WIP4 (home)
+// STATUS: Cards flipping and matching! But not shuffling, and moves counter not counting
 
 let cards = document.querySelectorAll('.card');
 const openCards = [];
@@ -8,32 +8,33 @@ let displayCard = function () {
   this.classList.toggle('open');
   this.classList.toggle('show');
 
-  //write 1 line of code below this that adds the clicked card to a new array. Declare the new array variable outside of this function so it can be accessed by other functions like the checker function
-    openCards.push(this); // ** (Lisa) pushes cards with .open class to new openCards array; can't tell if this is doing anything yet
+  // add the clicked card to a new array 
+  // declare the new array variable outside of this function so it can be accessed by other functions like the checker function
+    openCards.push(this); // ** (Lisa) pushes cards with .open class to new openCards array
 
-  // write an if statement to check if the new array has two items, if it does, call back a checker function (you will write this checker function after this)
+  // check if the new array contains two items 
+  // if it does, call back a checker function
   if (openCards.length === 2) {
     console.log('two!');
     checkMatch();
   }
 };
 
-// ** (Lisa) NEW STARTS HERE 7/1
+// ** (Lisa) NEW STARTS HERE 7/4
+
+// check if two cards in new array are a match
 function checkMatch () {
   if (openCards[0].innerHTML ===
-     openCards[1].innerHTML) { //not working
-  	//insert additional loop here; loop example below
-  		//var i;
-		//for (i = 0; i < cars.length; i++) { 
-    	//text += cars[i] + "<br>";
-    	//empty openCards array; 
-  this.classList.toggle('match'); 
-    console.log('match!');
+     openCards[1].innerHTML) {
+  	//loop over cards in openCards array; add match class
+		for (card of openCards) { 
+			card.classList.add('match');
+	  		}
+    	console.log('match!');
   }
   else {
   	//insert additional loop here; loop example below
-  		//var i;
-		//for (i = 0; i < cars.length; i++) { 
+		//for (let i = 0; i < cars.length; i++) { 
     	//text += cars[i] + "<br>";
     	//empty openCards array; 
     console.log('no match :( ')
