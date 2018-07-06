@@ -1,5 +1,9 @@
 // WIP4 (home)
-// STATUS: Cards flipping and matching! But not shuffling, and moves counter not counting
+// STATUS: Cards flipping and matching! 
+// not shuffling
+// moves counter not counting
+// too many cards can flip at once; also counts closing clicks
+// lightning bolts won't change color / match
 
 let cards = document.querySelectorAll('.card');
 const openCards = [];
@@ -8,9 +12,8 @@ let displayCard = function () {
   this.classList.toggle('open');
   this.classList.toggle('show');
 
-  // add the clicked card to a new array 
-  // declare the new array variable outside of this function so it can be accessed by other functions like the checker function
-    openCards.push(this); // ** (Lisa) pushes cards with .open class to new openCards array
+  // add the clicked card with .open class to a new array called openCards
+    openCards.push(this);
 
   // check if the new array contains two items 
   // if it does, call back a checker function
@@ -20,28 +23,29 @@ let displayCard = function () {
   }
 };
 
-// ** (Lisa) NEW STARTS HERE 7/4
+// ** (Lisa) NEW STARTS HERE 7/5
 
 // check if two cards in new array are a match
 function checkMatch () {
   if (openCards[0].innerHTML ===
      openCards[1].innerHTML) {
-  	//loop over cards in openCards array; add match class
+  	// loop over cards in openCards array; add match class
 		for (card of openCards) { 
 			card.classList.add('match');
 	  		}
     	console.log('match!');
+    	openCards.length = 0; // empty array after matching
   }
   else {
-  	//insert additional loop here; loop example below
-		//for (let i = 0; i < cars.length; i++) { 
-    	//text += cars[i] + "<br>";
-    	//empty openCards array; 
+  	// loop over cards; flip them back over if no match
+		// for (card of openCards) { 
+			// card.classList.add('match');
+	  		// }
+    	openCards.length = 0; // empty array after matching
     console.log('no match :( ')
   }
 }
 
-// write a checker function here. This function will need an if else statement to check the array you just made. 
 // As in: if the two cards match, toggle a 'match' class (which you have to make in css) else, toggle a 'wrong' class (you also have to make this). 
 // At the end of the function (after the if/else), empty out the array
 
