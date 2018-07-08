@@ -20,9 +20,6 @@ let displayCard = function () {
 
 // NEW STARTS HERE 7/7
 
-// add event listener to restart button; call startGame function
-restart.addEventListener('click', restartGame);
-
 // start game; this isn't working yet; added restart variable above
 let restartGame = function () {
 		shuffle(cards); 
@@ -31,17 +28,18 @@ let restartGame = function () {
 	}
 }
 
+// add event listener to restart button; call startGame function
+restart.addEventListener('click', restartGame);
 
 
   // add the clicked card with .open class to a new array called openCards
-    openCards.push(this);
+openCards.push(this);
 
   // check if the new array contains two items 
   // if it does, call back a checker function
-  if (openCards.length === 2) {
-    console.log('two!');
-    checkMatch();
-  }
+if (openCards.length === 2) {
+	console.log('two!');
+	checkMatch();
 };
 
 // ** (Lisa) NEW STARTS HERE 7/5
