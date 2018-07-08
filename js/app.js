@@ -48,9 +48,6 @@ function checkMatch () {
   }
   else {
   	// loop over cards; flip them back over if no match
-		// for (card of openCards) { 
-			// card.classList.add('match');
-	  		// }
     	openCards.length = 0; // empty array after matching
     console.log('no match :( ')
   }
