@@ -1,16 +1,37 @@
 // WIP4 (home)
 // STATUS: Cards flipping and matching! 
-// not shuffling
+// not shuffling; stopped flipping after adding shuffle and moves counter
 // moves counter not counting
 // too many cards can flip at once; also counts closing clicks
-// lightning bolts won't change color / match
+// lightning bolts won't change color / match; fix this
+// anchors remain open; need to close
+// no modal yet
+// no timer yet
+// no star rating yet
+// no readme detailing dependencies yet
 
 let cards = document.querySelectorAll('.card');
 const openCards = [];
+let restart = document.querySelector('.restart');
 
 let displayCard = function () {
   this.classList.toggle('open');
   this.classList.toggle('show');
+
+// NEW STARTS HERE 7/7
+
+// add event listener to restart button; call startGame function
+restart.addEventListener('click', restartGame);
+
+// start game; this isn't working yet; added restart variable above
+let restartGame = function () {
+		shuffle(cards); 
+		//scorePanel
+		moves = 0;
+	}
+}
+
+
 
   // add the clicked card with .open class to a new array called openCards
     openCards.push(this);
@@ -58,7 +79,7 @@ for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener('click', displayCard);
 }
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+// Shuffle function from http://stackoverflow.com/a/2450976, provided by Udacity in starter code
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -73,7 +94,10 @@ function shuffle(array) {
     return array;
 }
 
-const deck = document.querySelector('.deck');
+
+// below is test code
+
+/* const deck = document.querySelector('.deck');
 function startGame() {
   let shuffledCards = shuffle(cards);
   for (let i = 0; i < shuffledCards.length; i++) {
@@ -96,3 +120,4 @@ function moveCounter() {
         startTimer();
     }
 }
+*/ 
