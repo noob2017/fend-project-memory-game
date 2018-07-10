@@ -1,36 +1,52 @@
 // Master (home)
-// STATUS: Cards flipping and matching! 
+// STATUS: Cards flipping and matching! Moves counter working!
+// unmatched cards flip, but way too fast
+// no timer yet
 // not shuffling
-// moves counter not counting
 // too many cards can flip at once; also counts closing clicks
 // clicking same card twice yields a match
-// lightning bolts won't change color / match; fix this
+// lightning bolts won't change color / match; fix this (in HTML?)
 // anchors remain open; need to close
 // no modal yet
-// no timer yet
 // no star rating yet
 // no readme detailing dependencies yet
 
 let cards = document.querySelectorAll('.card');
 const openCards = [];
 let restart = document.querySelector('.restart');
-const moves = document.querySelector('moves');
+//let moves = document.querySelector('moves');
+let moves = 0;
 const deck = document.querySelector('.deck');
 
 let displayCard = function () {
   this.classList.toggle('open');
   this.classList.toggle('show');
 
-  // WORKS / add the clicked card with .open class to a new array called openCards
-openCards.push(this);
+	// WORKS / increment moves
+	function countMoves () {
+		moves++;
+		let movesNumber = document.querySelector('.moves');
+		movesNumber.innerHTML = moves;
+		//NOT WORKING / start timer on first move / error start timer is not defined
+	   /*if (moves === 1) {
+	        seconds = 0;
+	        minutes = 0;
+	        hour = 0;
+	        startTimer();
+    	}*/
+	}  
 
-  // WORKS / check if the new array contains two items 
-  // WORKS / if it does, call back a checker function
-if (openCards.length === 2) {
-	console.log('two!');
-	checkMatch();
+	  // WORKS / add the clicked card with .open class to a new array called openCards
+	openCards.push(this);
+
+	  // WORKS / check if the new array contains two items 
+	  // WORKS / if it does, call back a checker function
+	if (openCards.length === 2) {
+		console.log('two!');
+		checkMatch();
+		countMoves();
+	}	
 };
-}
 
 // WORKS / check if two cards in new array are a match
 function checkMatch () {
@@ -44,11 +60,18 @@ function checkMatch () {
     	openCards.length = 0; // empty array after matching
   }
   else {
-  	// WORKS / loop over cards; flip them back over if no match
+  	// PARTIALLY WORKS / FLIPPING OVER TOO FAST / loop over cards; flip them back over if no match
+  	// NOT WORKING / setTimeout not working at all; breaks the whole game due to unexpected token at line 65
+    setTimeout () {	
+    	for (card of openCards) { 
+			card.classList.remove('open', 'show');
+			// setTimeout // https://www.w3schools.com/jsref/met_win_settimeout.asp
+	  		}, 1000;
     	openCards.length = 0; // WORKS / empty array after matching
-    console.log('no match :( ')
-  }
-}
+    	console.log('no match :( ')
+		}
+	}	
+}	
 
 // NOT WORKING / start game; added restart variable above
 let restartGame = function () {
