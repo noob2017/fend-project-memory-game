@@ -1,5 +1,6 @@
 // Master (home)
 // STATUS: Cards flipping and matching! Moves counter working!
+// BROKEN: setTimeout not working at all; breaks the whole game due to unexpected token at line 65
 // unmatched cards flip, but way too fast
 // no timer yet
 // not shuffling
@@ -17,6 +18,7 @@ let restart = document.querySelector('.restart');
 //let moves = document.querySelector('moves');
 let moves = 0;
 const deck = document.querySelector('.deck');
+//let flipTimeout = setTimeout();
 
 let displayCard = function () {
   this.classList.toggle('open');
@@ -50,28 +52,44 @@ let displayCard = function () {
 
 // WORKS / check if two cards in new array are a match
 function checkMatch () {
-  if (openCards[0].innerHTML ===
+	if (openCards[0].innerHTML ===
      openCards[1].innerHTML) {
   	// WORKS / loop over cards in openCards array; add match class
 		for (card of openCards) { 
 			card.classList.add('match');
-	  		}
+	  	}
     	console.log('match!');
     	openCards.length = 0; // empty array after matching
-  }
-  else {
+  	}
+  	else {
   	// PARTIALLY WORKS / FLIPPING OVER TOO FAST / loop over cards; flip them back over if no match
-  	// NOT WORKING / setTimeout not working at all; breaks the whole game due to unexpected token at line 65
-    setTimeout () {	
-    	for (card of openCards) { 
-			card.classList.remove('open', 'show');
-			// setTimeout // https://www.w3schools.com/jsref/met_win_settimeout.asp
-	  		}, 1000;
-    	openCards.length = 0; // WORKS / empty array after matching
-    	console.log('no match :( ')
-		}
-	}	
-}	
+  	// NOT WORKING / setTimeout not working at all; breaks the whole game due to unexpected token at line 65 or 67
+	    //setTimeout () {	
+	    //setTimeout(checkMatch, 1000);	
+	    	//setTimeout(5000);
+	    	//setTimeout (
+		    	for (card of openCards) { 
+					card.classList.remove('open', 'show');
+					// NOT WORKING
+					//setTimeout(5000);
+					//checkMatch(setTimeout, 1000);
+					// setTimeout // https://www.w3schools.com/jsref/met_win_settimeout.asp
+			  	}//, 1000;
+			//)  	
+		    	openCards.length = 0; // WORKS / empty array after matching
+		    	console.log('no match :( ');
+		    	// NOT WORKING / setTimeout doesn't work below, either
+		    	//setTimeout(5000);
+			//}
+			//5000,
+			//);
+
+  	}	
+};	
+
+
+// NOT WORKING / doesn't work here, either; thought if I called it outside of the checkMatch function it might, but no go :(
+//setTimeout(checkMatch, 1000);
 
 // NOT WORKING / start game; added restart variable above
 let restartGame = function () {
