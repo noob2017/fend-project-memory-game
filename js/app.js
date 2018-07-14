@@ -57,7 +57,7 @@ function checkMatch () {
 	if (openCards[0].innerHTML ===
      openCards[1].innerHTML) {
   	// BROKEN / loop over cards in openCards array; add match class
-		for (card of openCards) { 
+		for (let card of openCards) { 
 			card.classList.add('match');
 	  	}
     	console.log('match!');
@@ -66,7 +66,7 @@ function checkMatch () {
   	else {
   	// BROKEN / FLIPPING OVER TOO FAST / loop over cards; flip them back over if no match
     	card.classList.add('no-match');
-    	for (card of openCards) { 
+    	for (let card of openCards) { 
 			card.classList.remove('open', 'show');
 			// setTimeout // https://www.w3schools.com/jsref/met_win_settimeout.asp
 	  	}
