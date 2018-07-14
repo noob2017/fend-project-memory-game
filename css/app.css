@@ -81,6 +81,11 @@ h1 {
     font-size: 33px;
 }
 
+/* added new no-match class */
+.deck .card.no-match {
+    transform: rotateY(0);
+}
+
 /*
  * Styles for the Score Panel
  */
