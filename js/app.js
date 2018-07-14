@@ -23,22 +23,21 @@ let deck = document.querySelector('.deck');
 
 // WORKS / shows card symbol if clicked; event listener below
 let displayCard = function () {
-  this.classList.toggle('open');
-  this.classList.toggle('show');
+	this.classList.toggle('open');
+	this.classList.toggle('show');
+	// WORKS / add the clicked card with .open class to a new array called openCards
+	openCards.push(this);
+
+  	// WORKS / check if the new array contains two items 
+  	// WORKS / if it does, call back a checker function and start moves counter
+	if (openCards.length === 2) {
+	console.log('two!');
+	countMoves();
+	checkMatch();
+	}	
 };  
 
-  // BROKEN / add the clicked card with .open class to a new array called openCards
-openCards.push(this);
-
-  // BROKEN / check if the new array contains two items 
-  // BROKEN / if it does, call back a checker function
-if (openCards.length === 2) {
-	console.log('two!');
-	checkMatch();
-	countMoves();
-}
-
-// BROKEN / increment moves
+// WORKS / increment moves
 function countMoves () {
 	moves++;
 	let movesNumber = document.querySelector('.moves');
@@ -52,22 +51,23 @@ function countMoves () {
 	}*/
 }
 
-// BROKEN / check if two cards in new array are a match
+// WORKS / check if two cards in new array are a match
 function checkMatch () {
 	if (openCards[0].innerHTML ===
      openCards[1].innerHTML) {
-  	// BROKEN / loop over cards in openCards array; add match class
+  	// WORKS / loop over cards in openCards array; add match class
 		for (let card of openCards) { 
 			card.classList.add('match');
 	  	}
     	console.log('match!');
-    	openCards.length = 0; // empties array after matching
+    	openCards.length = 0; // WORKS / empties array after matching
   	}
   	else {
-  	// BROKEN / FLIPPING OVER TOO FAST / loop over cards; flip them back over if no match
-    	card.classList.add('no-match');
+  	// PARTIALLY WORKING / FLIPPING OVER TOO FAST / loop over cards; flip them back over if no match
+    // try setTimeout here	
     	for (let card of openCards) { 
-			card.classList.remove('open', 'show');
+			card.classList.remove('open', 'show', 'no-match');
+			card.classList.add('no-match');
 			// setTimeout // https://www.w3schools.com/jsref/met_win_settimeout.asp
 	  	}
     	openCards.length = 0;  // WORKS / empty array after matching
