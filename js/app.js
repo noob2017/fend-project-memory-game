@@ -4,12 +4,14 @@
 // DONE: Cards matching!
 // DONE: Moves counter counting!
 // DONE: Anchors started from card class!
-// DONE: Lightning bolt started from card class!
-// DEBUGGING: Lighting bolts won't take match class
-// DEBUGGING: unmatched cards flip, but don't return to original state; clicking again leaves purple background
-// TO-DO: no player timer yet
+// DONE: Lightning bolt restarted from card class!
+// DONE: Unmatched cards turn purple, then return to original .card state!
+// DONE: Comment in HTML moved to bottom of code; for some reason inline commenting didn't work
+// DONE: Lighting bolts take match class!
+// DEBUGGING: no game timer yet
+// TO-DO: no restart button action yet
 // TO-DO: not shuffling
-// TO-DO: too many cards can flip at once; also counts closing clicks
+// TO-DO: too many cards can flip at once
 // TO-DO: clicking same card twice yields a match
 // TO-DO: no modal yet
 // TO-DO: no star rating yet
@@ -20,6 +22,16 @@ let openCards = [];
 let restart = document.querySelector('.restart');
 let moves = 0;
 let deck = document.querySelector('.deck');
+//let timer = 0; 
+//let timerOff = true;
+let timer = document.querySelector('.timer')
+/*{ // NOT WORKING / NEW 7/17 / working on getting timer to count
+    seconds: 0,
+    minutes: 0,
+    clearTime: -1
+}*/ 
+let second = 0, minute = 0; // from: https://scotch.io/tutorials/how-to-build-a-memory-matching-game-in-javascript
+//var interval; // from: https://scotch.io/tutorials/how-to-build-a-memory-matching-game-in-javascript
 
 // WORKS / shows card symbol if clicked; event listener below
 let displayCard = function () {
@@ -63,19 +75,59 @@ function checkMatch () {
     	openCards.length = 0; // WORKS / empties array after matching
   	}
   	else {
-  	// PARTIALLY WORKING / doesn't change back to grey / loop over cards; flip them back over if no match
-    // setTimeout below not working
-    	for (let card of openCards) { 
-			card.classList.remove('open', 'show', 'no-match');
-			setTimeout (card.classList.add('no-match'), 1000);
-			card.classList.add('card');
-			
-			// setTimeout // https://www.w3schools.com/jsref/met_win_settimeout.asp
-	  	}
-    	openCards.length = 0;  // WORKS / empty array after matching
-    	console.log('no match :( ');
+	    for (let card of openCards) { 
+	    card.classList.add('no-match');
+		}	
+    	setTimeout(resetCards, 1200);
+		console.log('no match :( ');
   	}	
 }	
+
+function resetCards () {
+	for (let card of openCards) { 
+		card.classList.remove('open', 'show', 'no-match');
+		card.classList.add('card');
+		//openCards.length = 0; // doesn't work here - closes only one card
+	}
+	openCards.length = 0;  // WORKS / empty array after matching
+}
+
+//////////////
+
+// NOT WORKING / NEW 7/17 / working on setting up and starting / stopping the game timer
+/*function timerAction () {
+	deck.addEventListener('click', startTimer);
+}*/ 
+
+// NOT WORKING / NEW 7/17 / 
+/*function startTimer () { // Help found here: https://stackoverflow.com/questions/46458740/starting-timer-when-clicking-first-card-of-memory-game
+    if (timer.seconds === 59) {
+        timer.minutes++;
+        timer.seconds = 0;
+    } 
+    else {
+        timer.seconds++;
+    };
+}*/
+
+// WORKS BUT I DON'T LIKE IT
+function startTimer () { // Help found here: https://scotch.io/tutorials/how-to-build-a-memory-matching-game-in-javascript
+ interval = setInterval(function(){
+        timer.innerHTML = minute+"mins "+second+"secs";
+        second++;
+        if(second == 60){
+            minute++;
+            second = 0;
+        }
+        if(minute == 60){
+            hour++;
+            minute = 0;
+        }
+    },1000);
+}
+
+
+//////////////
 
 // NOT WORKING / start game; added restart variable above
 /*let restartGame = function () {
@@ -92,6 +144,7 @@ function checkMatch () {
 // WORKS / loop to add event listeners
 for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener('click', displayCard);
+    cards[i].addEventListener('click', startTimer); // NOT WORKING / NEW 7/17 
 }
 
 // NOT WORKING / Shuffle function from http://stackoverflow.com/a/2450976, provided by Udacity in starter code
