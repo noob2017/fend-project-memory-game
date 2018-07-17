@@ -84,6 +84,7 @@ h1 {
 /* added new no-match class */
 .deck .card.no-match {
     transform: rotateY(0);
+    background: #aa7ecd;
 }
 
 /*

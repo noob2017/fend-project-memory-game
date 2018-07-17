@@ -1,16 +1,16 @@
 // Master (home)
-// STATUS: Debugging / broken
-// WORKING: Cards flipping!
-// BROKEN: Cards not matching (no color change on match; no console log message)
-// BROKEN: Moves counter stopped counting
-// BROKEN: setTimeout not working at all; breaks the whole game due to unexpected token at line 65
-// TO-DO: unmatched cards flip, but way too fast
-// TO-DO: no timer yet
+// STATUS: Working on setTimeout for flip and shuffle function
+// DONE: Cards flipping!
+// DONE: Cards matching!
+// DONE: Moves counter counting!
+// DONE: Anchors started from card class!
+// DONE: Lightning bolt started from card class!
+// DEBUGGING: Lighting bolts won't take match class
+// DEBUGGING: unmatched cards flip, but don't return to original state; clicking again leaves purple background
+// TO-DO: no player timer yet
 // TO-DO: not shuffling
 // TO-DO: too many cards can flip at once; also counts closing clicks
 // TO-DO: clicking same card twice yields a match
-// TO-DO: lightning bolts won't change color / match; fix this (in HTML?)
-// TO-DO: anchors remain open; need to close
 // TO-DO: no modal yet
 // TO-DO: no star rating yet
 // TO-DO: no readme detailing dependencies yet
@@ -42,12 +42,12 @@ function countMoves () {
 	moves++;
 	let movesNumber = document.querySelector('.moves');
 	movesNumber.innerHTML = moves;
-	//NOT WORKING / start timer on first move / error start timer is not defined
+	//NOT WORKING / start timer on first move / TO-DO: need to write this function
    /*if (moves === 1) {
         seconds = 0;
         minutes = 0;
         hour = 0;
-        startTimer();
+        startTimer(); // TO-DO: need to write this function
 	}*/
 }
 
@@ -63,11 +63,13 @@ function checkMatch () {
     	openCards.length = 0; // WORKS / empties array after matching
   	}
   	else {
-  	// PARTIALLY WORKING / FLIPPING OVER TOO FAST / loop over cards; flip them back over if no match
-    // try setTimeout here	
+  	// PARTIALLY WORKING / doesn't change back to grey / loop over cards; flip them back over if no match
+    // setTimeout below not working
     	for (let card of openCards) { 
 			card.classList.remove('open', 'show', 'no-match');
-			card.classList.add('no-match');
+			setTimeout (card.classList.add('no-match'), 1000);
+			card.classList.add('card');
+			
 			// setTimeout // https://www.w3schools.com/jsref/met_win_settimeout.asp
 	  	}
     	openCards.length = 0;  // WORKS / empty array after matching
@@ -127,17 +129,4 @@ function startGame() {
   }
 }
 
-
-function moveCounter() {
-    moves++;
-    const counter = document.querySelector('.moves');
-    counter.innerHTML = moves;
-    //start timer on first move
-    if (moves === 1) {
-        seconds = 0;
-        minutes = 0;
-        hour = 0;
-        startTimer();
-    }
-}
 */ 
