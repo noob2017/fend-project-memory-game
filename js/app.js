@@ -1,5 +1,5 @@
 // Master (home)
-// STATUS: Working on setTimeout for flip and shuffle function
+// STATUS: Debugging timer issues; trying to shuffle and disable cards
 // DONE: Cards flipping!
 // DONE: Cards matching!
 // DONE: Moves counter counting!
@@ -8,7 +8,9 @@
 // DONE: Unmatched cards turn purple, then return to original .card state!
 // DONE: Comment in HTML moved to bottom of code; for some reason inline commenting didn't work
 // DONE: Lighting bolts take match class!
-// DEBUGGING: game timer format is off; seconds are compounded with each click so that clock runs too fast / maybe disabled class will work for this too?
+// DONE: Timer displays properly!
+// DONE: Timer counts up with first click!
+// DEBUGGING: timer seconds are compounded with each click so that clock runs too fast / maybe disabled class will work for this too?
 // TO-DO: no restart button action yet
 // TO-DO: not shuffling
 // TO-DO: too many cards can flip at once / try adding a 'disabled' class to the deck and add css to disable clicking on the card. So IF the card is 'open', disabled clicking on the card
@@ -17,7 +19,7 @@
 // TO-DO: no star rating yet
 // TO-DO: no readme detailing dependencies yet
 
-// Global variables
+////////////// GLOBAL VARIABLES ///////////////////////
 let cards = document.querySelectorAll('.card');
 let openCards = [];
 let restart = document.querySelector('.restart');
@@ -165,6 +167,7 @@ function shuffleDeck() {
 // gives error NaN js 151
 // works better 7/18 / but still counting each click and incrementing seconds by number of clicks
 // another counter option: https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
+// another timer resource: https://codepen.io/chrisvneal/pen/OEMJyR
 
 function startTimer() {
     timerStart = setInterval(() => {
@@ -185,9 +188,6 @@ function startTimer() {
             //seconds);
     }, 1000);
 }
-
-
-
 
 
 ////////////// TIMER ///////////////////////
