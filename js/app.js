@@ -14,6 +14,7 @@
 // TO-DO: no restart button action yet
 // TO-DO: not shuffling
 // TO-DO: too many cards can flip at once / try adding a 'disabled' class to the deck and add css to disable clicking on the card. So IF the card is 'open', disabled clicking on the card
+// or try only allowing cards to be added to flippedCards if the did not have class open.
 // TO-DO: clicking same card twice yields a match / try adding the disabled class, as above
 // TO-DO: no modal yet
 // TO-DO: no star rating yet
@@ -108,7 +109,7 @@ function resetCards () {
 // NOT SURE IF WORKING
 // create function to shuffle cards and create a new deck
 // Help from Bre Bartmann: https://codepen.io/Brew42/pen/XBXVvY
-function shuffleDeck() {
+/* function shuffleDeck() {
 
     const shuffledDeck = shuffle(allCards);
     console.log(shuffledDeck);
@@ -121,46 +122,8 @@ function shuffleDeck() {
         });
         resetAllCards();
     }
-}
-
-
-
-////////////// TIMER ///////////////////////
-
-// NOT WORKING / NEW 7/17 / working on setting up and starting / stopping the game timer
-/*function timerAction () {
-	deck.addEventListener('click', startTimer);
 }*/ 
 
-// NOT WORKING / NEW 7/17 / 
-/*function startTimer () { // Help found here: https://stackoverflow.com/questions/46458740/starting-timer-when-clicking-first-card-of-memory-game
-    if (timer.seconds === 59) {
-        timer.minutes++;
-        timer.seconds = 0;
-    } 
-    else {
-        timer.seconds++;
-    };
-}*/
-
-////////////// TIMER ///////////////////////
-
-// WORKS BUT I DON'T LIKE IT - format changes to only 1 digit after : and seconds are too fast / seconds are compounding based on # of clicks
-/*function startTimer () { // Help found here: https://scotch.io/tutorials/how-to-build-a-memory-matching-game-in-javascript
-	setInterval(function(){
-        timer.innerHTML = minute +':'+ second;
-        second++;
-        //second.padString(2);
-        if(second == 60){
-            minute++;
-            second = 0;
-        }
-        if(minute == 60){
-            hour++;
-            minute = 0;
-        }
-    },1000);
-}*/ 
 
 ////////////// TIMER ///////////////////////
 // Help from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010
@@ -187,18 +150,119 @@ function startTimer() {
         //console.log(timer + ' ' + minutes + ' ' +
             //seconds);
     }, 1000);
+    //document.getElementById("deck").removeEventListener("click", arguments.callee); / suggested by Illee / where to put it?	
 }
+
+
+////////////// START GAME ///////////////////////
+
+// NOT WORKING / start game; added restart variable above
+/*let restartGame = function () {
+		//shuffle(cards); 
+		//scorePanel
+		moves = 0;
+};*/
+
+// NOT WORKING / add event listener to restart button; call startGame function
+//restart.addEventListener('click', restartGame);
+
+// ======================================== END OF FIRST SESSION =======================================
+
+// WORKS / loop to add event listeners
+for (let i = 0; i < cards.length; i++) {
+    cards[i].addEventListener('click', displayCard);
+}
+
+deck.addEventListener('click', startTimer); // suggested by Illee 
+//cards[i].addEventListener('click', startTimer); / old version removed 7/19
+
+////////////// SHUFFLE ///////////////////////
+
+// NOT WORKING / Shuffle function from http://stackoverflow.com/a/2450976, provided by Udacity in starter code
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+// NOT WORKING / write a for loop that appends cards to the deck using the deck and the array
+   /* for (card of cards) {
+    	deck.appendChild(card);
+    }
+    return array;*/
+        //remove classes from all cards
+    for (var i = 0; i < allCards.length; i++) { // Illee suggested I move inside the function; not sure if this is right place?
+        deck.innerHTML = '';
+        [].forEach.call(allCards, function(item) {
+            deck.appendChild(item);
+        });
+        resetAllCards();
+    }
+}
+
+// TO-DO // document.getElementById('restart').addEventListener('click', restart); / turn this on once function created below
+
+// TO-DO // function restart () {  / need to create this part
+
+//}
 
 
 ////////////// TIMER ///////////////////////
 
-/*let startTimer = function () {
-        if (timer.seconds === 59) {
-            timer.minutes++;
-            timer.seconds = 0;
-        } else {
-            timer.seconds++;
-    }*/
+// WORKS BUT I DON'T LIKE IT - format changes to only 1 digit after : and seconds are too fast / seconds are compounding based on # of clicks
+/*function startTimer () { // Help found here: https://scotch.io/tutorials/how-to-build-a-memory-matching-game-in-javascript
+	setInterval(function(){
+        timer.innerHTML = minute +':'+ second;
+        second++;
+        //second.padString(2);
+        if(second == 60){
+            minute++;
+            second = 0;
+        }
+        if(minute == 60){
+            hour++;
+            minute = 0;
+        }
+    },1000);
+}*/ 
+
+////////////// TIMER ///////////////////////
+
+// NOT WORKING / NEW 7/17 / working on setting up and starting / stopping the game timer
+/*function timerAction () {
+	deck.addEventListener('click', startTimer);
+}*/ 
+
+// NOT WORKING / NEW 7/17 / 
+/*function startTimer () { // Help found here: https://stackoverflow.com/questions/46458740/starting-timer-when-clicking-first-card-of-memory-game
+    if (timer.seconds === 59) {
+        timer.minutes++;
+        timer.seconds = 0;
+    } 
+    else {
+        timer.seconds++;
+    };
+}*/
+
+
+////////////// TIMER ///////////////////////
+// NOT WORKING
+/* const deck = document.querySelector('.deck');
+function startGame() {
+  let shuffledCards = shuffle(cards);
+  for (let i = 0; i < shuffledCards.length; i++) {
+    [].forEach.call(shuffledCards, function(item) {
+      deck.appendChild(item);
+    });
+  }
+}
+
+*/ 
 
 ////////////// TIMER ///////////////////////
 
@@ -221,59 +285,14 @@ function stopTimer() {
   clearInterval(interval);
 }*/ 
 
-////////////// START GAME ///////////////////////
-
-// NOT WORKING / start game; added restart variable above
-/*let restartGame = function () {
-		//shuffle(cards); 
-		//scorePanel
-		moves = 0;
-};*/
-
-// NOT WORKING / add event listener to restart button; call startGame function
-//restart.addEventListener('click', restartGame);
-
-// ======================================== END OF FIRST SESSION =======================================
-
-// WORKS / loop to add event listeners
-for (let i = 0; i < cards.length; i++) {
-    cards[i].addEventListener('click', displayCard);
-    cards[i].addEventListener('click', startTimer); // NOT WORKING / NEW 7/17 
-}
-
-////////////// SHUFFLE ///////////////////////
-
-// NOT WORKING / Shuffle function from http://stackoverflow.com/a/2450976, provided by Udacity in starter code
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-// NOT WORKING / write a for loop that appends cards to the deck using the deck and the array
-   /* for (card of cards) {
-    	deck.appendChild(card);
-    }
-    return array;*/
-}
-
-
 
 ////////////// TIMER ///////////////////////
-// NOT WORKING
-/* const deck = document.querySelector('.deck');
-function startGame() {
-  let shuffledCards = shuffle(cards);
-  for (let i = 0; i < shuffledCards.length; i++) {
-    [].forEach.call(shuffledCards, function(item) {
-      deck.appendChild(item);
-    });
-  }
-}
 
-*/ 
+/*let startTimer = function () {
+        if (timer.seconds === 59) {
+            timer.minutes++;
+            timer.seconds = 0;
+        } else {
+            timer.seconds++;
+    }*/
+
