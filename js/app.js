@@ -26,11 +26,30 @@ let openCards = [];
 let restart = document.querySelector('.restart');
 let moves = 0;
 let deck = document.querySelector('.deck');
-//var interval; // from: https://scotch.io/tutorials/how-to-build-a-memory-matching-game-in-javascript
 let timer = 0; // also from Bre Bartman
-//let timerAllow = true; // what does this do???
 const seconds = timer % 60;
 const minutes = timer / 60;
+
+
+////////////// START GAME ///////////////////////
+
+// not sure about this... this should be for when the user opens, or just on restart?
+/*let startGame = function() {
+	startTimer();
+
+}*/ 
+
+// NOT WORKING / start game; added restart variable above
+/*let restartGame = function () {
+		//shuffle(cards); 
+		//scorePanel
+		moves = 0;
+};*/
+
+// NOT WORKING / add event listener to restart button; call startGame function
+//restart.addEventListener('click', restartGame);
+
+
 
 ////////////// SHOW CARDS WHEN CLICKED ///////////////////////
 // shows card symbol if clicked; event listener below
@@ -144,17 +163,7 @@ function startTimer() {
 
 
 
-////////////// START GAME ///////////////////////
 
-// NOT WORKING / start game; added restart variable above
-/*let restartGame = function () {
-		//shuffle(cards); 
-		//scorePanel
-		moves = 0;
-};*/
-
-// NOT WORKING / add event listener to restart button; call startGame function
-//restart.addEventListener('click', restartGame);
 
 // ======================================== END OF FIRST SESSION =======================================
 
@@ -170,28 +179,58 @@ deck.addEventListener('click', startTimer); // suggested by Illee
 
 
 ////////////// SHUFFLE ///////////////////////
+function shuffleCards() { // Help from https://strugglebus.io/
+    // grab all the cards in the deck, turn the NodeList into an array for shuffle()
+        const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
+        const shuffledCards = shuffle(cardsToShuffle);
+    //append shuffled cards to the deck
+        for (let card of shuffledCards) {
+            cardContainer.append(card);
+        }
+    }
+shuffleCards();
+//generateStars();
+
+
 // NOT WORKING / Shuffle function from http://stackoverflow.com/a/2450976, provided by Udacity in starter code
-function shuffle(deck) { //changed from array to cards, then to deck (for each instance below!)
-    var currentIndex = deck.length, temporaryValue, randomIndex; //changed array.length to cards.length
+function shuffle(array) { //changed from array to cards, then to deck (for each instance below!)
+    var currentIndex = array.length, temporaryValue, randomIndex; //changed array.length to cards.length
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
         temporaryValue = deck[currentIndex]; //changed array to cards
-        deck[currentIndex] = deck[randomIndex]; //changed array to cards
-        deck[randomIndex] = temporaryValue; //changed array to cards
+        array[currentIndex] = array[randomIndex]; //changed array to cards
+        array[randomIndex] = temporaryValue; //changed array to cards
     }
 
+    return array;
+
 // NOT WORKING / write a for loop that appends cards to the deck using the deck and the array; inserted inside the shuffle function provided by Udacity   
-    for (var i = 0; i < deck.length; i++) { // changed allCards to cards / Illee suggested I move inside the function; not sure if this is right place?
+    /*for (var i = 0; i < deck.length; i++) { // changed allCards to cards, then to deck / Illee suggested I move inside the function; not sure if this is right place?
         deck.innerHTML = '';
         [].forEach.call(deck, function(item) { //changed allCards to cards
             deck.appendChild(card);
         });
         resetCards(); //changed allCards to cards
         console.log('cards shuffled');
-    }
+    }*/ 
+
+    /*let li_cards = document.querySelectorAll('li.card');
+    for (var i = 0; i < li_cards.length; i++) {
+    	li_cards[i].remove();
+    } //this removes everything! how to put it back?? / Help from Jonathan Piva in Slack
+
+	for (var i = 0; i < cards.length; i++) {
+    deck.append(cards[i]);
+  	}*/ 
 }
+
+	//Brent (FEND) - Michigan [21 hours ago] / note to another student in slack
+	//In the code above it looks like you're calling the shuffle function on each 
+	//card, but the function works on the whole deck. I would call shuffle on the 
+	//whole deck and save the result in a variable, then use that variable to add 
+	//back the html for the deck.
 
 ////////////// RESTART THE GAME ///////////////////////
 restart.addEventListener('click', refresh); // restarts the game when the restart button is clicked
@@ -213,6 +252,19 @@ function refresh () {
 
 
 
+
+
+////////////// START GAME ///////////////////////
+
+// NOT WORKING / start game; added restart variable above
+/*let restartGame = function () {
+		//shuffle(cards); 
+		//scorePanel
+		moves = 0;
+};*/
+
+// NOT WORKING / add event listener to restart button; call startGame function
+//restart.addEventListener('click', restartGame);
 
 
 ////////////// TIMER ///////////////////////
