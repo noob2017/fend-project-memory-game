@@ -14,7 +14,7 @@
 // DEBUGGING: restart button created but no restart button action yet / rethink this / one card will restart, but not multiple or matches
 // DEBUGGING: not shuffling
 // TO-DO: too many cards can flip at once / try adding a 'disabled' class to the deck and add css to disable clicking on the card. So IF the card is 'open', disabled clicking on the card
-// or try only allowing cards to be added to flippedCards if the did not have class open.
+// or try only allowing cards to be added to flippedCards if they did not have class open.
 // TO-DO: clicking same card twice yields a match / try adding the disabled class, as above
 // TO-DO: no modal yet
 // TO-DO: no star rating yet
@@ -68,6 +68,13 @@ let displayCard = function () {
 	}	
 };  
 
+// NOT WORKING / added to disable clicking on the same card twice, but didn't stop that, and just added the console message for every click
+/*function disableClick() {
+	document.querySelectorAll('openCards').disabled = true;
+	console.log('This card is already open');
+}*/
+
+
 ////////////// COUNT MOVES ///////////////////////
 // increment moves
 function countMoves () {
@@ -101,8 +108,7 @@ function checkMatch () {
 function resetCards () {
 	for (let card of openCards) { 
 		card.classList.remove('open', 'show', 'no-match');
-		card.classList.add('card');
-		//openCards.length = 0; // doesn't work here - closes only one card
+		//card.classList.add('card'); / not necessary anymore?
 	}
 	openCards.length = 0;  // empty array after matching
 }
@@ -171,7 +177,13 @@ function startTimer() {
 // WORKS / loop to add event listeners
 for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener('click', displayCard);
+    //cards[i].addEventListener('click', disableClick);
 }
+
+/*for (let i = 0; i < cards.length; i++) {
+	cards[i].addEventListener('click', disableClick);
+}*/
+
 
 ////////////// ADD EVENT LISTENER TO DECK & START TIMER IF CLICKED ///////////////////////
 deck.addEventListener('click', startTimer); // suggested by Illee 
@@ -179,32 +191,24 @@ deck.addEventListener('click', startTimer); // suggested by Illee
 
 
 ////////////// SHUFFLE ///////////////////////
-function shuffleCards() { // Help from https://strugglebus.io/
-    // grab all the cards in the deck, turn the NodeList into an array for shuffle()
-        const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
-        const shuffledCards = shuffle(cardsToShuffle);
-    //append shuffled cards to the deck
-        for (let card of shuffledCards) {
-            cardContainer.append(card);
-        }
-    }
-shuffleCards();
-//generateStars();
-
 
 // NOT WORKING / Shuffle function from http://stackoverflow.com/a/2450976, provided by Udacity in starter code
-function shuffle(array) { //changed from array to cards, then to deck (for each instance below!)
-    var currentIndex = array.length, temporaryValue, randomIndex; //changed array.length to cards.length
+function shuffle(array) { 
+    let array = document.getElementsByClassName('card');
+    let currentIndex = array.length, temporaryValue, randomIndex; 
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
-        temporaryValue = deck[currentIndex]; //changed array to cards
-        array[currentIndex] = array[randomIndex]; //changed array to cards
-        array[randomIndex] = temporaryValue; //changed array to cards
+        temporaryValue = deck[currentIndex]; 
+        array[currentIndex] = array[randomIndex]; 
+        array[randomIndex] = temporaryValue; 
     }
+    for (let card of array) {
+            deck.append(card);
+        }
+}    
 
-    return array;
 
 // NOT WORKING / write a for loop that appends cards to the deck using the deck and the array; inserted inside the shuffle function provided by Udacity   
     /*for (var i = 0; i < deck.length; i++) { // changed allCards to cards, then to deck / Illee suggested I move inside the function; not sure if this is right place?
@@ -224,20 +228,21 @@ function shuffle(array) { //changed from array to cards, then to deck (for each 
 	for (var i = 0; i < cards.length; i++) {
     deck.append(cards[i]);
   	}*/ 
-}
+//}
 
 	//Brent (FEND) - Michigan [21 hours ago] / note to another student in slack
 	//In the code above it looks like you're calling the shuffle function on each 
 	//card, but the function works on the whole deck. I would call shuffle on the 
 	//whole deck and save the result in a variable, then use that variable to add 
 	//back the html for the deck.
+	// try Array.from() method.
 
 ////////////// RESTART THE GAME ///////////////////////
 restart.addEventListener('click', refresh); // restarts the game when the restart button is clicked
 
 // NOT WORKING / console message prints, but none of the functions are completed; is it the order?
 function refresh () {
-	shuffle(cards);//added cards 
+	shuffle();//added cards 
 	resetCards();
 	startTimer();
 	moves = 0;
