@@ -2,8 +2,13 @@
 
 ## Table of Contents
 
+* [Dependencies](#dependencies)
 * [Player Instructions](#instructions)
 * [About Udacity](#about Udacity)
+
+## Dependencies
+
+The game is dependent upon Bootstrap and Google Fonts.
 
 ## Player Instructions
 

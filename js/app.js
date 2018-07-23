@@ -1,8 +1,7 @@
 
-// DEBUGGING: too many cards can flip at once / try adding a 'disabled' class to the deck and add css to disable clicking on the card. So IF the card is 'open', disabled clicking on the card
-// or try only allowing cards to be added to flippedCards if they did not have class open.
-// TO-DO: no modal yet
-// DEBUGGING: star rating not working yet
+// DEBUGGING: no modal yet
+// DEBUGGING: starStatus rating not working yet
+// DEBUGGING: fixed issue where reset button counts as a move; but reset button still restarts timer at 0:01; starts moves at 1, not 0
 
 
 ////////////// GLOBAL VARIABLES ///////////////////////
@@ -43,6 +42,8 @@ function countMoves () {
 	moves++; // increment moves
 	let movesNumber = document.querySelector('.moves');
 	movesNumber.innerHTML = moves;
+
+	//if (moves === 16)
 }
 
 ////////////// STAR RATINGS ///////////////////////
@@ -120,10 +121,13 @@ function startTimer() {
     }, 1000);  
     deck.removeEventListener('click', arguments.callee); // stops timer from compounding with each click
 }
-function stopTimer() {
+// NOT WORKING
+/*function stopTimer() {
 	const timerHTML = document.querySelector('.timer');
 	restart.addEventListener('click', this);
-}
+}*/ 
+//use a moves counter which keeps track of the number of moves and then when it reaches 16 moves, 
+//then it runs an end game function which stops the timer, activates the modal, puts the stars and time in the modal
 
 ////////////// ADD EVENT LISTENER TO CARDS & DISPLAY IF CLICKED ///////////////////////
 
@@ -144,6 +148,12 @@ function shuffle(array) {
     var nodeList = document.querySelectorAll('.card');
         var array = Array.from(nodeList);
     var currentIndex = array.length, temporaryValue, randomIndex; 
+    resetCards();
+	//stopTimer();
+	timer = 0;
+	//countMoves();
+	moves = 0;
+	console.log('game refreshed');
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
