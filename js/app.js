@@ -1,20 +1,4 @@
-// Master (home)
-// STATUS: Debugging timer issues; trying to shuffle and disable cards
-// DONE: Cards flipping!
-// DONE: Cards matching!
-// DONE: Moves counter counting!
-// DONE: Anchors started from card class!
-// DONE: Lightning bolt restarted from card class!
-// DONE: Unmatched cards turn purple, then return to original .card state!
-// DONE: Comment in HTML moved to bottom of code; for some reason inline commenting didn't work
-// DONE: Lighting bolts take match class!
-// DONE: Timer displays properly!
-// DONE: Timer counts up with first click!
-// DONE: Fixed clock running too fast!
-// DONE: Cards shuffling!
-// DONE: Clicking same card twice no longer yields a match!
-// DONE: README is done.
-// DONE: Restart button refeshes game and timer - but not yet stars (see below)
+
 // DEBUGGING: too many cards can flip at once / try adding a 'disabled' class to the deck and add css to disable clicking on the card. So IF the card is 'open', disabled clicking on the card
 // or try only allowing cards to be added to flippedCards if they did not have class open.
 // TO-DO: no modal yet
@@ -62,29 +46,24 @@ function countMoves () {
 }
 
 ////////////// STAR RATINGS ///////////////////////
-/*function removeStar () {
-	if (moves = 5)	
-}*/ 
+// Inspiration from from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010 
 
+// NOT WORKING 
 function removeStar() {
-
     for (star of allStars) {
-
         if (star.style.display !== 'none') {
             star.style.display = 'none';
             starCount--;
             break;
-
         }
     }
 }
 
-function checkStarStatus() {
-    if (moves === 6 || moves === 12 || moves === 20) { // 14, 28, 42
+function starStatus() {
+    if (moves === 6 || moves === 12 || moves === 20) {
         removeStar();
     }
 }
-
 
 ////////////// CHECK FOR MATCH ///////////////////////
 
@@ -161,7 +140,7 @@ deck.addEventListener('click', startTimer);
 
 // Shuffle function from http://stackoverflow.com/a/2450976, provided by Udacity in starter code
 function shuffle(array) { 
-    var array = document.getElementsByClassName('card'); // to declare array
+    var array = document.getElementsByClassName('card'); // to define array
     var currentIndex = array.length, temporaryValue, randomIndex; 
 
     while (currentIndex !== 0) {
@@ -177,11 +156,38 @@ function shuffle(array) {
     }
 }    
 
+////////////// DISPLAY MODAL ///////////////////////
+
+// Inspiration from: https://strugglebus.io/
+function checkForWin() { // NOT WORKING
+    const matchedCards = document.querySelectorAll('.match');
+    const matchedArray = Array.from(matchedCards);
+    if (matchedArray.length === 16) {
+        clearInterval(timer);
+        console.log(`You won in ${moves} moves and it took ${minutesDisplay.innerText} minutes and ${secondsDisplay.innerText} seconds! You earned ${starNumber} stars!`);
+        popModal();
+    }  
+}
+/*function popModal() {
+    modalBox.style.display = "block";
+    updateModalInfo();
+}
+function updateModalInfo() {
+    modalCongratsText.innerText = `Congratulations! You won in ${moves} moves!`;
+    modalStarText.innerText = `You earned ${movesRating} stars.`;
+    modalTimeText.innerText = `It took you ${minutesDisplay.innerText} minutes and ${secondsDisplay.innerText} seconds.`;
+}
+function resetTimer() {
+    minutesDisplay.innerHTML = "0";
+    secondsDisplay.innerHTML = "00";
+    totalSeconds = 0;
+    timer = setInterval(playTimer, 1000);
+}*/
+
 ////////////// RESTART THE GAME ///////////////////////
 
 restart.addEventListener('click', refresh); // restarts the game when the restart button is clicked
 
-// NOT WORKING
 function refresh () {
 	shuffle();
 	resetCards();
