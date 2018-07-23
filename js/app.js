@@ -13,13 +13,13 @@
 // DONE: Fixed clock running too fast!
 // DONE: Cards shuffling!
 // DONE: Clicking same card twice no longer yields a match!
-
-// DEBUGGING: restart button created but doesn't change timer; flips two matched diamonds on restart
-// TO-DO: too many cards can flip at once / try adding a 'disabled' class to the deck and add css to disable clicking on the card. So IF the card is 'open', disabled clicking on the card
+// DONE: README is done.
+// DONE: Restart button refeshes game and timer - but not yet stars (see below)
+// DEBUGGING: too many cards can flip at once / try adding a 'disabled' class to the deck and add css to disable clicking on the card. So IF the card is 'open', disabled clicking on the card
 // or try only allowing cards to be added to flippedCards if they did not have class open.
 // TO-DO: no modal yet
-// TO-DO: no star rating yet
-// TO-DO: no readme detailing dependencies yet
+// DEBUGGING: star rating not working yet
+
 
 ////////////// GLOBAL VARIABLES ///////////////////////
 
@@ -31,6 +31,9 @@ let deck = document.querySelector('.deck');
 let timer = 0;
 const seconds = timer % 60; // Inspiration from from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010
 const minutes = timer / 60; // Inspiration from from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010
+const getStars = document.getElementsByClassName('fa fa-star');
+const allStars = [...getStars]; //creates array of stars for countdown / // Inspiration from from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010
+let starCount = 3; 
 
 ////////////// SHOW CARDS WHEN CLICKED ///////////////////////
 
@@ -58,6 +61,31 @@ function countMoves () {
 	movesNumber.innerHTML = moves;
 }
 
+////////////// STAR RATINGS ///////////////////////
+/*function removeStar () {
+	if (moves = 5)	
+}*/ 
+
+function removeStar() {
+
+    for (star of allStars) {
+
+        if (star.style.display !== 'none') {
+            star.style.display = 'none';
+            starCount--;
+            break;
+
+        }
+    }
+}
+
+function checkStarStatus() {
+    if (moves === 6 || moves === 12 || moves === 20) { // 14, 28, 42
+        removeStar();
+    }
+}
+
+
 ////////////// CHECK FOR MATCH ///////////////////////
 
 // check if two cards in new array are a match
@@ -71,12 +99,14 @@ function checkMatch () {
     	openCards.length = 0; // empties array after matching
   	}
   	else {
-	    for (let card of openCards) { 
-	    card.classList.add('no-match');
-		}	
-    	setTimeout(resetCards, 1200);
-		console.log('no match :( ');
-  	}	
+        for (let card of openCards) {
+        card.classList.add('no-match');
+            setTimeout(function() {
+                card.classList.remove('open','no-match','show');
+            }, 1200)
+            }
+            openCards= [];
+    }
 }	
 
 ////////////// RESET CARDS TO ORIGINAL POSITION ///////////////////////
@@ -142,8 +172,9 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue; 
     }
     for (let card of array) {
-            deck.append(card);
-        }
+    	card.classList.remove('open','show', 'match');
+        deck.append(card);
+    }
 }    
 
 ////////////// RESTART THE GAME ///////////////////////
