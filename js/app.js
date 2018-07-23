@@ -46,8 +46,8 @@ function countMoves () {
 }
 
 ////////////// STAR RATINGS ///////////////////////
-// Inspiration from from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010 
 
+// Inspiration from from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010 
 // NOT WORKING 
 function removeStar() {
     for (star of allStars) {
@@ -140,13 +140,15 @@ deck.addEventListener('click', startTimer);
 
 // Shuffle function from http://stackoverflow.com/a/2450976, provided by Udacity in starter code
 function shuffle(array) { 
-    var array = document.getElementsByClassName('card'); // to define array
+    //var array = document.getElementsByClassName('card'); // to define array
+    var nodeList = document.querySelectorAll('.card');
+        var array = Array.from(nodeList);
     var currentIndex = array.length, temporaryValue, randomIndex; 
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
-        temporaryValue = deck[currentIndex]; 
+        temporaryValue = array[currentIndex]; 
         array[currentIndex] = array[randomIndex]; 
         array[randomIndex] = temporaryValue; 
     }
@@ -168,31 +170,17 @@ function checkForWin() { // NOT WORKING
         popModal();
     }  
 }
-/*function popModal() {
-    modalBox.style.display = "block";
-    updateModalInfo();
-}
-function updateModalInfo() {
-    modalCongratsText.innerText = `Congratulations! You won in ${moves} moves!`;
-    modalStarText.innerText = `You earned ${movesRating} stars.`;
-    modalTimeText.innerText = `It took you ${minutesDisplay.innerText} minutes and ${secondsDisplay.innerText} seconds.`;
-}
-function resetTimer() {
-    minutesDisplay.innerHTML = "0";
-    secondsDisplay.innerHTML = "00";
-    totalSeconds = 0;
-    timer = setInterval(playTimer, 1000);
-}*/
 
 ////////////// RESTART THE GAME ///////////////////////
 
-restart.addEventListener('click', refresh); // restarts the game when the restart button is clicked
+//restart.addEventListener('click', refresh); // restarts the game when the restart button is clicked
+restart.addEventListener('click', shuffle);
 
-function refresh () {
+/*function refresh () {
 	shuffle();
 	resetCards();
 	stopTimer();
 	timer = 0;
 	moves = 0;
 	console.log('game refreshed');
-}
+}*/ 
