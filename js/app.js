@@ -17,6 +17,8 @@ const minutes = timer / 60; // Inspiration from from Bre Bartman https://codepen
 const getStars = document.getElementsByClassName('fa fa-star');
 const allStars = [...getStars]; //creates array of stars for countdown / // Inspiration from from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010
 let starCount = 3; 
+let modal = document.getElementById('congrats'); // with help from: https://www.w3schools.com/howto/howto_css_modals.asp
+let matchedCards = [];
 
 ////////////// SHOW CARDS WHEN CLICKED ///////////////////////
 
@@ -43,7 +45,9 @@ function countMoves () {
 	let movesNumber = document.querySelector('.moves');
 	movesNumber.innerHTML = moves;
 
-	//if (moves === 16)
+	/*if (moves === 16) {
+		modal.classList.add('modal', 'modal-content', 'show-modal');
+	}*/
 }
 
 ////////////// STAR RATINGS ///////////////////////
@@ -74,6 +78,9 @@ function checkMatch () {
      openCards[1].innerHTML) {
 		for (let card of openCards) { // loop over cards in openCards array; add match class
 			card.classList.add('match');
+			//matchedCards.push(this); // doesn't seem to be working
+			matchedCards.push(card); // this works, but still no modal :( 
+			displayModal();
 	  	}
     	console.log('match!');
     	openCards.length = 0; // empties array after matching
@@ -171,7 +178,7 @@ function shuffle(array) {
 ////////////// DISPLAY MODAL ///////////////////////
 
 // Inspiration from: https://strugglebus.io/
-function checkForWin() { // NOT WORKING
+/*function checkForWin() { // NOT WORKING
     const matchedCards = document.querySelectorAll('.match');
     const matchedArray = Array.from(matchedCards);
     if (matchedArray.length === 16) {
@@ -179,6 +186,13 @@ function checkForWin() { // NOT WORKING
         console.log(`You won in ${moves} moves and it took ${minutesDisplay.innerText} minutes and ${secondsDisplay.innerText} seconds! You earned ${starNumber} stars!`);
         popModal();
     }  
+}*/ 
+
+function displayModal() {
+	if (matchedCards.length === 2) {
+		congrats.classList.add('modal', 'modal-content', 'show-modal');	
+		console.log('display modal');
+	}
 }
 
 ////////////// RESTART THE GAME ///////////////////////
