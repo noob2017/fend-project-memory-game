@@ -44,6 +44,7 @@ function countMoves () {
 	moves++; // increment moves
 	let movesNumber = document.querySelector('.moves');
 	movesNumber.innerHTML = moves;
+	removeStar();
 
 	/*if (moves === 16) {
 		modal.classList.add('modal', 'modal-content', 'show-modal');
@@ -54,7 +55,7 @@ function countMoves () {
 
 // Inspiration from from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010 
 // NOT WORKING 
-function removeStar() {
+/*function removeStar() {
     for (star of allStars) {
         if (star.style.display !== 'none') {
             star.style.display = 'none';
@@ -62,12 +63,21 @@ function removeStar() {
             break;
         }
     }
-}
+}*/
 
-function starStatus() {
+/*function starStatus() {
     if (moves === 6 || moves === 12 || moves === 20) {
         removeStar();
     }
+}*/
+
+function removeStar() {
+	if (moves === 6) {
+		star3.style.display = 'none';
+	}
+	if (moves === 12) {
+		star2.style.display = 'none';
+	}
 }
 
 ////////////// CHECK FOR MATCH ///////////////////////

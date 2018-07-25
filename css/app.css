@@ -119,24 +119,48 @@ h1 {
 
 .modal { /* Added this to the Udacity starter code. Help from: https://www.w3schools.com/howto/howto_css_modals.asp*/
     /*display: none; /* Hidden by default */
-    visibility:hidden;
-    position: fixed; /* Stay in place */
+    visibility: hidden;
+    position: absolute; /* Stay in place */
     z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 25%; /* Full width */
-    height: 25%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    /*padding: 20px;*/
+    /*left: 0;*/
+    /*top: 0;*/
+    /*width: 15%; /* Full width */
+    /*height: 15%; /* Full height */
+    /* overflow: auto; /* Enable scroll if needed */
+    /*background-color: /*rgb(0,0,0); /* Fallback color */
+    /*background-color: /*rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: green;
+    /*text-align: center;*/
+    display: flex; /*testing this*/
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center
+    /*align-items: center;*/
+    /*align-content: center;*/
+    /*flex-grow: 1;*/
 }
 
 .modal-content { /* Added this to the Udacity starter code. Help from: https://www.w3schools.com/howto/howto_css_modals.asp*/
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
+    background-color: pink;/*#fefefe;*/
+    margin: 15% auto; /* 15% auto from the top and centered */
+    padding: 20px; /*15%; 20px; 1rem 1.5rem;testing diff sizes */ 
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
+    position: absolute; /* testing this*/ 
+    top: 0; /*50% testing this*/
+    left: 10%; /*50% testing this*/
+    /*width: 24rem; /*testing this*/
+    border-radius: 10px; /*testing this*/
+    border-color: pink; /*testing this*/
+    text-align: center;/*testing this*/
+    display: flex; /*testing this*/
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center; /*space-around;*/
+    /*align-items: center;*/
+    /*align-content: center;*/
+    /*flex-grow: 1; /*testing*/
 }
 
 .show-modal { /* Added this to the Udacity starter code. Help from: https://sabe.io/tutorials/how-to-create-modal-popup-box*/
@@ -147,3 +171,15 @@ h1 {
 }
 
 /* Try some of these styles for the modal box: https://sabe.io/tutorials/how-to-create-modal-popup-box;*/ 
+/* Also referenced: https://css-tricks.com/snippets/css/a-guide-to-flexbox/;*/
+
+button {
+    font-size: 20px;
+    border-radius: 8px;
+    box-shadow: none;
+    border: none;
+    padding: 15px 28px;
+    margin: 20px;
+    display: flex;
+    justify-content: space-around;
+}
