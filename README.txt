@@ -8,7 +8,7 @@
 
 ## Dependencies
 
-The game is dependent upon Bootstrap and Google Fonts.
+The game is dependent upon Bootstrap, Google Fonts, and Font Awesome.
 
 ## Player Instructions
 

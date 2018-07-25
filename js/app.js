@@ -20,6 +20,7 @@ let starCount = 3;
 let modal = document.getElementById('congrats'); // with help from: https://www.w3schools.com/howto/howto_css_modals.asp
 let matchedCards = [];
 
+
 ////////////// SHOW CARDS WHEN CLICKED ///////////////////////
 
 // shows card symbol if clicked; event listener below
@@ -72,11 +73,16 @@ function countMoves () {
 }*/
 
 function removeStar() {
-	if (moves === 6) {
-		star3.style.display = 'none';
+	let star3 = document.getElementById('star3');
+	let star2 = document.getElementById('star2');
+
+	if (moves == 6) {
+		//star3.style.display = 'none';
+		star3.classList.add('stars-hide');
 	}
-	if (moves === 12) {
-		star2.style.display = 'none';
+	if (moves == 12) {
+		//star2.style.display = 'none';
+		star2.classList.add('stars-hide');
 	}
 }
 
@@ -88,8 +94,7 @@ function checkMatch () {
      openCards[1].innerHTML) {
 		for (let card of openCards) { // loop over cards in openCards array; add match class
 			card.classList.add('match');
-			//matchedCards.push(this); // doesn't seem to be working
-			matchedCards.push(card); // this works, but still no modal :( 
+			matchedCards.push(card); // this works
 			displayModal();
 	  	}
     	console.log('match!');
@@ -100,9 +105,9 @@ function checkMatch () {
         card.classList.add('no-match');
             setTimeout(function() {
                 card.classList.remove('open','no-match','show');
-            }, 1200)
-            }
-            openCards= [];
+        	}, 1200)
+        }
+        openCards = [];
     }
 }	
 
@@ -199,7 +204,7 @@ function shuffle(array) {
 }*/ 
 
 function displayModal() {
-	if (matchedCards.length === 2) {
+	if (matchedCards.length === 12) { //breaks after 10, or 5 matches
 		congrats.classList.add('modal', 'modal-content', 'show-modal');	
 		console.log('display modal');
 	}
