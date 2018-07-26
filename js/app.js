@@ -173,10 +173,10 @@ function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex; 
     resetCards();
 	//stopTimer();
-	timer = 0;
+	//timer = 0;
 	//countMoves();
-	moves = 0;
-	console.log('game refreshed');
+	//moves = 0;
+	console.log('cards shuffled');
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -217,26 +217,31 @@ function endGame() {
 
 ////////////// RESTART THE GAME ///////////////////////
 
+//function restartButton () {
+
+//}
+
 //restart.addEventListener('click', refresh); // restarts the game when the restart button is clicked
 restart.addEventListener('click', shuffle);
 restart.addEventListener('click', clearInterval);
-yesBtn.addEventListener('click', function() {
-	congrats.classList.remove('show-modal'); 
-});
+//yesBtn.addEventListener('click', function() {
+	//congrats.classList.remove('show-modal'); 
+//});
 //yesBtn.addEventListener('click', shuffle);
 //yesBtn.addEventListener('click', clearInterval);
 yesBtn.addEventListener('click', refresh);
-noBtn.addEventListener('click', function() {
-	congrats.classList.remove('modal', 'modal-content', 'show-modal'); 
-});
+noBtn.addEventListener('click', refresh);
+//noBtn.addEventListener('click', function() {
+	//congrats.classList.remove('modal', 'modal-content', 'show-modal'); 
+//});	
 
 function refresh () {
 	shuffle();
 	//resetCards();
 	//stopTimer();
+	clearInterval(timerStart);
 	timer = 0;
 	moves = 0;
-	clearInterval(timerStart);
 	congrats.classList.remove('modal', 'modal-content', 'show-modal');
 	console.log('game restarted');
 }
