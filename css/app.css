@@ -137,11 +137,12 @@ h1 {
 }
 
 .modal-content { /* Added this to the Udacity starter code. Help from: https://www.w3schools.com/howto/howto_css_modals.asp*/
-    display: flex;
+    /display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     margin: 10%;
+    text-align: center; /*suggested by Illee*/ 
 }
 
 .show-modal { /* Added this to the Udacity starter code. Help from: https://sabe.io/tutorials/how-to-create-modal-popup-box*/
@@ -164,3 +165,11 @@ button {
     display: flex;
     justify-content: space-around;
 }
+
+.buttons {
+    display: flex; /*suggested by Illee*/
+}
+
+/*no-button {
+
+}*/

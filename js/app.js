@@ -1,7 +1,8 @@
 
-// DEBUGGING: no modal yet
+// DEBUGGING: modal doesn't appear after 16 matched cards, but does after 2
 // DEBUGGING: starStatus rating not working yet
-// DEBUGGING: fixed issue where reset button counts as a move; but reset button still restarts timer at 0:01; starts moves at 1, not 0
+// DEBUGGING: reset button still restarts timer at 0:01; starts moves at 1, not 0
+// DEBUGGING: now card matching stops working after a few matches; all cards flip and don't match / change color
 
 
 ////////////// GLOBAL VARIABLES ///////////////////////
@@ -19,6 +20,8 @@ const allStars = [...getStars]; //creates array of stars for countdown / // Insp
 let starCount = 3; 
 let modal = document.getElementById('congrats'); // with help from: https://www.w3schools.com/howto/howto_css_modals.asp
 let matchedCards = [];
+//let endTime = document.getElementById('timer').innerHTML;
+
 
 
 ////////////// SHOW CARDS WHEN CLICKED ///////////////////////
@@ -46,10 +49,6 @@ function countMoves () {
 	let movesNumber = document.querySelector('.moves');
 	movesNumber.innerHTML = moves;
 	removeStar();
-
-	/*if (moves === 16) {
-		modal.classList.add('modal', 'modal-content', 'show-modal');
-	}*/
 }
 
 ////////////// STAR RATINGS ///////////////////////
@@ -95,7 +94,7 @@ function checkMatch () {
 		for (let card of openCards) { // loop over cards in openCards array; add match class
 			card.classList.add('match');
 			matchedCards.push(card); // this works
-			displayModal();
+			endGame();
 	  	}
     	console.log('match!');
     	openCards.length = 0; // empties array after matching
@@ -203,10 +202,13 @@ function shuffle(array) {
     }  
 }*/ 
 
-function displayModal() {
-	if (matchedCards.length === 12) { //breaks after 10, or 5 matches
+function endGame() {
+	if (matchedCards.length === 16) { //breaks after 10, or 5 matches
 		congrats.classList.add('modal', 'modal-content', 'show-modal');	
 		console.log('display modal');
+		document.querySelector('#endMoves').innerHTML = moves;
+		document.querySelector('#endTime').innerHTML = timer;
+		//stopTimer(); // haven't written this yet!
 	}
 }
 

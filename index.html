@@ -17,9 +17,9 @@
 
         <section class="score-panel">
         	<ul class="stars">
-        		<id="star1"<li><i class="fa fa-star"></i></li></id="star1">
-        		<id="star2"<li><i class="fa fa-star"></i></li></id="star2">
-        		<id="star3"<li><i class="fa fa-star"></i></li></id="star3">
+                <li><i class="fa fa-star" id="star1"></i></li>
+        		<li><i class="fa fa-star" id="star2"></i></li>
+        		<li><i class="fa fa-star" id="star3"></i></li>
         	</ul>
 
         	<span class="moves">0</span> Moves
@@ -33,11 +33,13 @@
             <div id="congrats" class="modal"> <!-- added this to the Udacity starter code with help from: https://www.w3schools.com/howto/howto_css_modals.asp -->
                 <div class="modal-content">
                 <h3>CONGRATULATIONS! *** YOU WON!</h3>
-                    <p>Game won in X time and Y star rating.</p>
+                    <p>You finished the game in <span id="endTime"></span> with <span id="endMoves"></span> moves!</p>
                     <br>
                     <p>Would you like to play again?</p>
-                        <button type="button">Yes</button>
-                        <button type="button">No</button>
+                        <div class="buttons">
+                            <button type="button" id="yes-btn">Yes</button>
+                            <button type="button" id="no-btn">No</button>
+                        </div>
                 </div>        
             </div>
         </section>
