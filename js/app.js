@@ -15,12 +15,14 @@ let deck = document.querySelector('.deck');
 let timer = 0;
 const seconds = timer % 60; // Inspiration from from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010
 const minutes = timer / 60; // Inspiration from from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010
-const getStars = document.getElementsByClassName('fa fa-star');
-const allStars = [...getStars]; //creates array of stars for countdown / // Inspiration from from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010
+//const getStars = document.getElementsByClassName('fa fa-star');
+//const allStars = [...getStars]; //creates array of stars for countdown / // Inspiration from from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010
 let starCount = 3; 
 let modal = document.getElementById('congrats'); // with help from: https://www.w3schools.com/howto/howto_css_modals.asp
 let matchedCards = [];
-//let endTime = document.getElementById('timer').innerHTML;
+let yesBtn = document.getElementById('yes-btn');
+let noBtn = document.getElementById('no-btn');
+
 
 
 
@@ -97,7 +99,7 @@ function checkMatch () {
 			endGame();
 	  	}
     	console.log('match!');
-    	openCards.length = 0; // empties array after matching
+    	openCards = []; // empties array after matching
   	}
   	else {
         for (let card of openCards) {
@@ -117,7 +119,7 @@ function resetCards () {
 		card.classList.remove('open', 'show', 'no-match');
 		//card.classList.add('card'); / not necessary anymore?
 	}
-	openCards.length = 0;  // empty array after matching
+	openCards = [];;  // empty array after matching
 }
 
 ////////////// START TIMER ///////////////////////
@@ -218,12 +220,23 @@ function endGame() {
 //restart.addEventListener('click', refresh); // restarts the game when the restart button is clicked
 restart.addEventListener('click', shuffle);
 restart.addEventListener('click', clearInterval);
+yesBtn.addEventListener('click', function() {
+	congrats.classList.remove('show-modal'); 
+});
+//yesBtn.addEventListener('click', shuffle);
+//yesBtn.addEventListener('click', clearInterval);
+yesBtn.addEventListener('click', refresh);
+noBtn.addEventListener('click', function() {
+	congrats.classList.remove('modal', 'modal-content', 'show-modal'); 
+});
 
-/*function refresh () {
+function refresh () {
 	shuffle();
-	resetCards();
-	stopTimer();
+	//resetCards();
+	//stopTimer();
 	timer = 0;
 	moves = 0;
-	console.log('game refreshed');
-}*/ 
+	clearInterval(timerStart);
+	congrats.classList.remove('modal', 'modal-content', 'show-modal');
+	console.log('game restarted');
+}
