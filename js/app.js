@@ -209,6 +209,7 @@ function endGame() {
 		document.querySelector('#endMoves').innerHTML = moves;
 		document.querySelector('#endTime').innerHTML = timer;
 		//stopTimer(); // haven't written this yet!
+		clearInterval(timerStart);
 	}
 }
 
@@ -216,6 +217,7 @@ function endGame() {
 
 //restart.addEventListener('click', refresh); // restarts the game when the restart button is clicked
 restart.addEventListener('click', shuffle);
+restart.addEventListener('click', clearInterval);
 
 /*function refresh () {
 	shuffle();
