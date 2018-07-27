@@ -1,8 +1,8 @@
 
-// DEBUGGING: modal doesn't appear after 16 matched cards, but does after 2
+// DEBUGGING: modal yes and no buttons don't take correct actions; modal content stays displayed after clicking either one
+// DEBUGGING: after modal, timer doesn't restart; moves doesn't reset to 0
 // DEBUGGING: starStatus rating not working yet
 // DEBUGGING: reset button still restarts timer at 0:01; starts moves at 1, not 0
-// DEBUGGING: now card matching stops working after a few matches; all cards flip and don't match / change color
 
 
 ////////////// GLOBAL VARIABLES ///////////////////////
@@ -210,8 +210,7 @@ function endGame() {
 		console.log('display modal');
 		document.querySelector('#endMoves').innerHTML = moves;
 		document.querySelector('#endTime').innerHTML = timer;
-		//stopTimer(); // haven't written this yet!
-		clearInterval(timerStart);
+		clearInterval(timerStart); // stops timer
 	}
 }
 
@@ -220,6 +219,11 @@ function endGame() {
 //function restartButton () {
 
 //}
+// on restart button click: clear timer, clear moves, shuffle cards, reset cards
+// on win game: show modal
+// on yes button click: clear modal, stop timer, clear timer, clear moves, shuffle cards, reset cards
+// on no button click: clear modal, show cards in winning position, show stopped timer, show stopped moves
+
 
 //restart.addEventListener('click', refresh); // restarts the game when the restart button is clicked
 restart.addEventListener('click', shuffle);
@@ -237,7 +241,7 @@ noBtn.addEventListener('click', refresh);
 
 function refresh () {
 	shuffle();
-	//resetCards();
+	resetCards();
 	//stopTimer();
 	clearInterval(timerStart);
 	timer = 0;
