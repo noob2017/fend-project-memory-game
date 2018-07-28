@@ -219,8 +219,10 @@ function endGame() {
 //function restartButton () {
 
 //}
-// on restart button click: clear timer, clear moves, shuffle cards, reset cards
-// on win game: show modal
+
+// ACTIONS: 
+// doesn't work after modal: on restart button click: clear timer, clear moves, shuffle cards, reset cards
+// DONE: on win game: show modal
 // on yes button click: clear modal, stop timer, clear timer, clear moves, shuffle cards, reset cards
 // on no button click: clear modal, show cards in winning position, show stopped timer, show stopped moves
 
@@ -248,4 +250,5 @@ function refresh () {
 	moves = 0;
 	congrats.classList.remove('modal', 'modal-content', 'show-modal');
 	console.log('game restarted');
+	document.querySelector('.modal').style.display ='block'; // suggested by Juan L (FEND) in Slack 7/28
 }
