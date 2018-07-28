@@ -16,15 +16,15 @@ let deck = document.querySelector('.deck');
 let timer = 0;
 const seconds = timer % 60; // Inspiration from from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010
 const minutes = timer / 60; // Inspiration from from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010
-//const getStars = document.getElementsByClassName('fa fa-star');
-//const allStars = [...getStars]; //creates array of stars for countdown / // Inspiration from from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010
+const getStars = document.getElementsByClassName('fa fa-star');
+const allStars = [...getStars]; //creates array of stars for countdown / // Inspiration from from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010
 let starCount = 3; 
 let modal = document.getElementById('congrats'); // with help from: https://www.w3schools.com/howto/howto_css_modals.asp
 let matchedCards = [];
 let yesBtn = document.getElementById('yes-btn');
 let noBtn = document.getElementById('no-btn');
-
-
+let star3 = document.getElementById('star3');
+let star2 = document.getElementById('star2'); // moved to globals at suggestion from drunkenkismet [FEND] in Slack on 7/28
 
 
 ////////////// SHOW CARDS WHEN CLICKED ///////////////////////
@@ -56,34 +56,11 @@ function countMoves () {
 
 ////////////// STAR RATINGS ///////////////////////
 
-// Inspiration from from Bre Bartman https://codepen.io/Brew42/pen/XBXVvY?editors=1010 
-// NOT WORKING 
-/*function removeStar() {
-    for (star of allStars) {
-        if (star.style.display !== 'none') {
-            star.style.display = 'none';
-            starCount--;
-            break;
-        }
-    }
-}*/
-
-/*function starStatus() {
-    if (moves === 6 || moves === 12 || moves === 20) {
-        removeStar();
-    }
-}*/
-
 function removeStar() {
-	let star3 = document.getElementById('star3');
-	let star2 = document.getElementById('star2');
-
 	if (moves == 6) {
-		//star3.style.display = 'none';
 		star3.classList.add('stars-hide');
 	}
 	if (moves == 12) {
-		//star2.style.display = 'none';
 		star2.classList.add('stars-hide');
 	}
 }
@@ -225,8 +202,7 @@ function endGame() {
 // on no button click: clear modal, show cards in winning position, show stopped timer, show stopped moves
 
 // restarts the game when the restart button is clicked
-restart.addEventListener('click', shuffle);
-restart.addEventListener('click', clearInterval);
+restart.addEventListener('click', refresh);
 
 // functions called when yes or no buttons are clicked
 yesBtn.addEventListener('click', refresh);
@@ -234,7 +210,7 @@ noBtn.addEventListener('click', function() {
 	modal.style.display = 'none';
 });
 
-function refresh() {
+function refresh() { // with help from drunkenkismet [FEND] in Slack on 7/28
   //stopTimer();
   clearInterval(timerStart);
   timer = 0;
@@ -248,6 +224,8 @@ function refresh() {
     } else {
         timerHTML.innerHTML = minutes + ' : ' + seconds;
   }
+  star3.classList.remove('stars-hide');
+  star2.classList.remove('stars-hide');
   console.log('game restarted');
   shuffle();
   resetCards();
