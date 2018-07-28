@@ -201,4 +201,5 @@ function refresh() { // with help from drunkenkismet [FEND] and Juan L (FEND) in
   console.log('game restarted');
   shuffle();
   resetCards();
+  deck.addEventListener('click', startTimer);
 }
