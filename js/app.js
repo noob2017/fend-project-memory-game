@@ -1,8 +1,4 @@
-
-// DEBUGGING: modal yes and no buttons don't take correct actions; modal content stays displayed after clicking either one
-// DEBUGGING: after modal, timer doesn't restart; moves doesn't reset to 0
-// DEBUGGING: starStatus rating not working yet
-// DEBUGGING: reset button still restarts timer at 0:01; starts moves at 1, not 0
+// DONE! :D 
 
 // Special thanks to illee // FEND for lots of help in Slack! <3 
 
@@ -56,11 +52,12 @@ function countMoves () {
 
 ////////////// STAR RATINGS ///////////////////////
 
+// removes a star after 6 and 12 moves
 function removeStar() {
-	if (moves == 6) {
+	if (moves === 6) {
 		star3.classList.add('stars-hide');
 	}
-	if (moves == 12) {
+	if (moves === 12) {
 		star2.classList.add('stars-hide');
 	}
 }
@@ -73,7 +70,7 @@ function checkMatch () {
      openCards[1].innerHTML) {
 		for (let card of openCards) { // loop over cards in openCards array; add match class
 			card.classList.add('match');
-			matchedCards.push(card); // this works
+			matchedCards.push(card);
 			endGame();
 	  	}
     	console.log('match!');
@@ -95,7 +92,6 @@ function checkMatch () {
 function resetCards () {
 	for (let card of openCards) { 
 		card.classList.remove('open', 'show', 'no-match');
-		//card.classList.add('card'); / not necessary anymore?
 	}
 	openCards = [];;  // empty array after matching
 }
@@ -122,13 +118,6 @@ function startTimer() {
     }, 1000);  
     deck.removeEventListener('click', arguments.callee); // stops timer from compounding with each click
 }
-// NOT WORKING
-/*function stopTimer() {
-	const timerHTML = document.querySelector('.timer');
-	restart.addEventListener('click', this);
-}*/ 
-//use a moves counter which keeps track of the number of moves and then when it reaches 16 moves, 
-//then it runs an end game function which stops the timer, activates the modal, puts the stars and time in the modal
 
 ////////////// ADD EVENT LISTENER TO CARDS & DISPLAY IF CLICKED ///////////////////////
 
@@ -145,15 +134,10 @@ deck.addEventListener('click', startTimer);
 
 // Shuffle function from http://stackoverflow.com/a/2450976, provided by Udacity in starter code
 function shuffle(array) { 
-    //var array = document.getElementsByClassName('card'); // to define array
     var nodeList = document.querySelectorAll('.card');
         var array = Array.from(nodeList);
     var currentIndex = array.length, temporaryValue, randomIndex; 
     resetCards();
-	//stopTimer();
-	//timer = 0;
-	//countMoves();
-	//moves = 0;
 	console.log('cards shuffled');
 
     while (currentIndex !== 0) {
@@ -171,19 +155,8 @@ function shuffle(array) {
 
 ////////////// DISPLAY MODAL ///////////////////////
 
-// Inspiration from: https://strugglebus.io/
-/*function checkForWin() { // NOT WORKING
-    const matchedCards = document.querySelectorAll('.match');
-    const matchedArray = Array.from(matchedCards);
-    if (matchedArray.length === 16) {
-        clearInterval(timer);
-        console.log(`You won in ${moves} moves and it took ${minutesDisplay.innerText} minutes and ${secondsDisplay.innerText} seconds! You earned ${starNumber} stars!`);
-        popModal();
-    }  
-}*/ 
-
 function endGame() {
-	if (matchedCards.length === 16) { //breaks after 10, or 5 matches
+	if (matchedCards.length === 16) {
 		congrats.classList.add('modal', 'modal-content', 'show-modal');	
 		console.log('display modal');
 		document.querySelector('#endMoves').innerHTML = moves;
@@ -196,7 +169,7 @@ function endGame() {
 ////////////// RESTART THE GAME ///////////////////////
 
 // ACTIONS: 
-// n restart button click: clear timer, clear moves, shuffle cards, reset cards
+// on restart button click: clear timer, clear moves, shuffle cards, reset cards
 // on win game: show modal
 // on yes button click: clear modal, stop timer, clear timer, clear moves, shuffle cards, reset cards
 // on no button click: clear modal, show cards in winning position, show stopped timer, show stopped moves
@@ -210,8 +183,7 @@ noBtn.addEventListener('click', function() {
 	modal.style.display = 'none';
 });
 
-function refresh() { // with help from drunkenkismet [FEND] in Slack on 7/28
-  //stopTimer();
+function refresh() { // with help from drunkenkismet [FEND] and Juan L (FEND) in Slack on 7/28
   clearInterval(timerStart);
   timer = 0;
   moves = 0;
@@ -229,4 +201,4 @@ function refresh() { // with help from drunkenkismet [FEND] in Slack on 7/28
   console.log('game restarted');
   shuffle();
   resetCards();
-} // reorganized function suggested by Juan L (FEND) in Slack on 7/28
+}
