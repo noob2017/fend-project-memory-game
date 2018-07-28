@@ -4,6 +4,7 @@
 // DEBUGGING: starStatus rating not working yet
 // DEBUGGING: reset button still restarts timer at 0:01; starts moves at 1, not 0
 
+// Special thanks to illee // FEND for lots of help in Slack! <3 
 
 ////////////// GLOBAL VARIABLES ///////////////////////
 
@@ -217,49 +218,36 @@ function endGame() {
 
 ////////////// RESTART THE GAME ///////////////////////
 
-//function restartButton () {
-
-//}
-
 // ACTIONS: 
-// doesn't work after modal: on restart button click: clear timer, clear moves, shuffle cards, reset cards
-// DONE: on win game: show modal
+// n restart button click: clear timer, clear moves, shuffle cards, reset cards
+// on win game: show modal
 // on yes button click: clear modal, stop timer, clear timer, clear moves, shuffle cards, reset cards
 // on no button click: clear modal, show cards in winning position, show stopped timer, show stopped moves
 
-
-//restart.addEventListener('click', refresh); // restarts the game when the restart button is clicked
+// restarts the game when the restart button is clicked
 restart.addEventListener('click', shuffle);
 restart.addEventListener('click', clearInterval);
-//yesBtn.addEventListener('click', function() {
-	//congrats.classList.remove('show-modal'); 
-//});
-//yesBtn.addEventListener('click', shuffle);
-//yesBtn.addEventListener('click', clearInterval);
-yesBtn.addEventListener('click', refresh);
-noBtn.addEventListener('click', refresh);
-//noBtn.addEventListener('click', function() {
-	//congrats.classList.remove('modal', 'modal-content', 'show-modal'); 
-//});	
 
-/*function refresh () {
-	shuffle();
-	resetCards();
-	//stopTimer();
-	clearInterval(timerStart);
-	timer = 0;
-	moves = 0;
-	congrats.classList.remove('modal', 'modal-content', 'show-modal');
-	console.log('game restarted');
-	document.querySelector('.modal').style.display ='block'; // suggested by Juan L (FEND) in Slack 7/28
-}*/
+// functions called when yes or no buttons are clicked
+yesBtn.addEventListener('click', refresh);
+noBtn.addEventListener('click', function() {
+	modal.style.display = 'none';
+});
 
 function refresh() {
   //stopTimer();
   clearInterval(timerStart);
   timer = 0;
   moves = 0;
+  let movesNumber = document.querySelector('.moves');
+  movesNumber.innerHTML = moves;
   modal.style.display = 'none';
+  const timerHTML = document.querySelector('.timer');
+  if (seconds < 10) {
+        timerHTML.innerHTML = minutes + ' : 0' + seconds;
+    } else {
+        timerHTML.innerHTML = minutes + ' : ' + seconds;
+  }
   console.log('game restarted');
   shuffle();
   resetCards();
