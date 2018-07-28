@@ -211,6 +211,7 @@ function endGame() {
 		document.querySelector('#endMoves').innerHTML = moves;
 		document.querySelector('#endTime').innerHTML = timer;
 		clearInterval(timerStart); // stops timer
+		modal.style.display = 'flex'; // suggested by Juan L (FEND) in Slack on 7/28
 	}
 }
 
@@ -241,7 +242,7 @@ noBtn.addEventListener('click', refresh);
 	//congrats.classList.remove('modal', 'modal-content', 'show-modal'); 
 //});	
 
-function refresh () {
+/*function refresh () {
 	shuffle();
 	resetCards();
 	//stopTimer();
@@ -251,4 +252,15 @@ function refresh () {
 	congrats.classList.remove('modal', 'modal-content', 'show-modal');
 	console.log('game restarted');
 	document.querySelector('.modal').style.display ='block'; // suggested by Juan L (FEND) in Slack 7/28
-}
+}*/
+
+function refresh() {
+  //stopTimer();
+  clearInterval(timerStart);
+  timer = 0;
+  moves = 0;
+  modal.style.display = 'none';
+  console.log('game restarted');
+  shuffle();
+  resetCards();
+} // reorganized function suggested by Juan L (FEND) in Slack on 7/28
